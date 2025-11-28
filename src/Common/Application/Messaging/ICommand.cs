@@ -17,7 +17,6 @@ public interface ICommand : IRequest<Result>, IBaseCommand;
 /// </summary>
 public interface ICommand<TResponse> : IRequest<Result<TResponse>>, IBaseCommand;
 
-
 /// <summary>
 /// Marker interface for all commands. Used to identify command types in the system.
 /// </summary>

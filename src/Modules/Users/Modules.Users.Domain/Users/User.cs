@@ -48,31 +48,10 @@ public sealed class User : Entity<UserId>
     /// The method generates a new <see cref="UserId"/> for the entity.
     /// All value objects should be validated in this method.
     /// </remarks>
-    public static Result<User> Create(string firstName, string lastName, string email, string passwordHash)
+    public static User Create(UserFirstName firstName, UserLastName lastName, UserEmail email, string passwordHash)
     {
-        Result<UserFirstName> firstNameResult = UserFirstName.Create(firstName);
-
-        if (firstNameResult.IsFailure)
-        {
-            return Result.Failure<User>(firstNameResult.Error);
-        }
-        
-        Result<UserLastName> lastNameResult = UserLastName.Create(lastName);
-
-        if (lastNameResult.IsFailure)
-        {
-            return Result.Failure<User>(lastNameResult.Error);
-        }
-        
-        Result<UserEmail> emailResult = UserEmail.Create(email);
-
-        if (emailResult.IsFailure)
-        {
-            return Result.Failure<User>(emailResult.Error);
-        }
-        
         var id = new UserId(Guid.NewGuid());
         
-        return new User(id, firstNameResult.Value, lastNameResult.Value, emailResult.Value, passwordHash);
+        return new User(id, firstName, lastName, email, passwordHash);
     }
 }

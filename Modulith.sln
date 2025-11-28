@@ -25,6 +25,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Users", "Users", "{8E20939E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modules.Users.Domain", "src\Modules\Users\Modules.Users.Domain\Modules.Users.Domain.csproj", "{67C34FCD-7B0D-4D38-BCB0-B265B89C6C00}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modules.Users.Application", "src\Modules\Users\Modules.Users.Application\Modules.Users.Application.csproj", "{A3DA80D9-F5EC-4457-BB9B-AA258FDA3402}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,6 +42,7 @@ Global
 		{453FDC97-D955-40AB-94D5-D3932318102C} = {383137F0-7326-4264-9A8C-5171E6658F40}
 		{8E20939E-2A30-49B7-AF59-BEB86415B288} = {4B33EE01-258E-438F-B16A-90FC07FEE3D4}
 		{67C34FCD-7B0D-4D38-BCB0-B265B89C6C00} = {8E20939E-2A30-49B7-AF59-BEB86415B288}
+		{A3DA80D9-F5EC-4457-BB9B-AA258FDA3402} = {8E20939E-2A30-49B7-AF59-BEB86415B288}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{F01A6EB2-A3E1-47D1-AD4A-A5BBE6A3E47B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -66,5 +69,9 @@ Global
 		{67C34FCD-7B0D-4D38-BCB0-B265B89C6C00}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{67C34FCD-7B0D-4D38-BCB0-B265B89C6C00}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{67C34FCD-7B0D-4D38-BCB0-B265B89C6C00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3DA80D9-F5EC-4457-BB9B-AA258FDA3402}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3DA80D9-F5EC-4457-BB9B-AA258FDA3402}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3DA80D9-F5EC-4457-BB9B-AA258FDA3402}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3DA80D9-F5EC-4457-BB9B-AA258FDA3402}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
