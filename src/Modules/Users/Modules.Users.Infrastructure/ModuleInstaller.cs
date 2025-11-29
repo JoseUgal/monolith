@@ -14,5 +14,7 @@ public sealed class ModuleInstaller : IModuleInstaller
     public void Install(IServiceCollection services, IConfiguration configuration)
     {
         services.InstallServicesFromAssemblies(configuration, AssemblyReference.Assembly);
+
+        services.AddSingletonAsImplementedInterfaces(AssemblyReference.Assembly);
     }
 }

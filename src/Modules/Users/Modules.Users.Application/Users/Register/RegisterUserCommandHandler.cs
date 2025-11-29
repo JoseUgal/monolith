@@ -1,6 +1,7 @@
 using Application.Messaging;
 using Domain.Errors;
 using Domain.Results;
+using Modules.Users.Application.Abstractions.Security;
 using Modules.Users.Domain.Users;
 
 namespace Modules.Users.Application.Users.Register;
@@ -8,7 +9,9 @@ namespace Modules.Users.Application.Users.Register;
 /// <summary>
 /// Represents the <see cref="RegisterUserCommand"/> handler.
 /// </summary>
-internal sealed class RegisterUserCommandHandler : ICommandHandler<RegisterUserCommand, Guid>
+internal sealed class RegisterUserCommandHandler(
+    IPasswordHasher passwordHasher    
+) : ICommandHandler<RegisterUserCommand, Guid>
 {
     /// <inheritdoc />
     public async Task<Result<Guid>> Handle(RegisterUserCommand command, CancellationToken cancellationToken)
@@ -32,6 +35,8 @@ internal sealed class RegisterUserCommandHandler : ICommandHandler<RegisterUserC
         {
             return Result.Failure<Guid>(error);
         }
+
+        var user = User.Create(firstName, lastName, email, passwordHasher.Hash(password.Value));
         
         throw new NotImplementedException("Register user is not implemented yet");
     }
