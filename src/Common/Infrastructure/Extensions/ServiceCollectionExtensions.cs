@@ -60,16 +60,15 @@ public static class ServiceCollectionExtensions
 
         return services;
     }
-
-
+    
     /// <summary>
     /// Scans the specified assembly for types implementing <see cref="ITransient"/> and
-    /// registers them as all their implemented interfaces with a transient lifetime.
+    /// registers them as all their matching interfaces (by name) with a transient lifetime.
     /// </summary>
     /// <param name="services">The <see cref="IServiceCollection"/> to add the services to.</param>
     /// <param name="assembly">The assembly to scan for transient services.</param>
     /// <returns>The same <see cref="IServiceCollection"/> instance so that multiple calls can be chained.</returns>
-    public static IServiceCollection AddTransientAsImplementedInterfaces(
+    public static IServiceCollection AddTransientAsMatchingInterfaces(
         this IServiceCollection services,
         Assembly assembly
     )
@@ -78,22 +77,21 @@ public static class ServiceCollectionExtensions
             scan.FromAssemblies(assembly)
                 .AddClasses(filter => filter.AssignableTo<ITransient>(), false)
                 .UsingRegistrationStrategy(RegistrationStrategy.Throw)
-                .AsImplementedInterfaces()
+                .AsMatchingInterface()
                 .WithTransientLifetime()
         );
 
         return services;
     }
-
-
+    
     /// <summary>
     /// Scans the specified assembly for types implementing <see cref="IScoped"/> and
-    /// registers them as all their implemented interfaces with a scoped lifetime.
+    /// registers them as all their matching interfaces (by name) with a scoped lifetime.
     /// </summary>
     /// <param name="services">The <see cref="IServiceCollection"/> to add the services to.</param>
     /// <param name="assembly">The assembly to scan for scoped services.</param>
     /// <returns>The same <see cref="IServiceCollection"/> instance so that multiple calls can be chained.</returns>
-    public static IServiceCollection AddScopedAsImplementedInterfaces(
+    public static IServiceCollection AddScopedAsMatchingInterfaces(
         this IServiceCollection services,
         Assembly assembly
     )
@@ -102,7 +100,7 @@ public static class ServiceCollectionExtensions
             scan.FromAssemblies(assembly)
                 .AddClasses(filter => filter.AssignableTo<IScoped>(), false)
                 .UsingRegistrationStrategy(RegistrationStrategy.Throw)
-                .AsImplementedInterfaces()
+                .AsMatchingInterface()
                 .WithScopedLifetime()
         );
 
@@ -111,12 +109,12 @@ public static class ServiceCollectionExtensions
 
     /// <summary>
     /// Scans the specified assembly for types implementing <see cref="ISingleton"/> and
-    /// registers them as all their implemented interfaces with a singleton lifetime.
+    /// registers them as all their matching interfaces (by name) with a singleton lifetime.
     /// </summary>
     /// <param name="services">The <see cref="IServiceCollection"/> to add the services to.</param>
     /// <param name="assembly">The assembly to scan for singleton services.</param>
     /// <returns>The same <see cref="IServiceCollection"/> instance so that multiple calls can be chained.</returns>
-    public static IServiceCollection AddSingletonAsImplementedInterfaces(
+    public static IServiceCollection AddSingletonAsMatchingInterfaces(
         this IServiceCollection services,
         Assembly assembly
     )
@@ -125,7 +123,7 @@ public static class ServiceCollectionExtensions
             scan.FromAssemblies(assembly)
                 .AddClasses(filter => filter.AssignableTo<ISingleton>(), false)
                 .UsingRegistrationStrategy(RegistrationStrategy.Throw)
-                .AsImplementedInterfaces()
+                .AsMatchingInterface()
                 .WithSingletonLifetime()
         );
         
