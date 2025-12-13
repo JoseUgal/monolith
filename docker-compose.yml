@@ -1,0 +1,12 @@
+services:
+  modulith-db:
+    image: postgres:14.1
+    container_name: Database
+    environment:
+      - POSTGRES_DB=modulith
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - ./.containers/database:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
