@@ -1,5 +1,6 @@
 using Microsoft.Extensions.Options;
-using Microsoft.OpenApi.Models;
+using Microsoft.OpenApi;
+using Swashbuckle.AspNetCore.Annotations;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace App.ServiceInstallers.Swagger;
@@ -12,12 +13,25 @@ internal sealed class SwaggerGenOptionsSetup : IConfigureOptions<SwaggerGenOptio
     /// <inheritdoc />
     public void Configure(SwaggerGenOptions options)
     {
-        options.SwaggerDoc("v1", new OpenApiInfo()
+        options.EnableAnnotations();
+        
+        options.SwaggerDoc("v1", new OpenApiInfo
             {
                 Version = "0.0.1",
                 Title = "Modulith API",
                 Description = "This swagger document describes the available API endpoints."
             }
+        );
+        
+        options.TagActionsBy(selector =>
+            {
+                SwaggerOperationAttribute? operation = selector.ActionDescriptor
+                    .EndpointMetadata
+                    .OfType<SwaggerOperationAttribute>()
+                    .FirstOrDefault();
+
+                return operation?.Tags ?? ["Default"];
+            }    
         );
         
         options.CustomSchemaIds(type => type.FullName);
