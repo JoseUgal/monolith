@@ -1,4 +1,5 @@
 using Domain.Results;
+using Endpoints.Extensions;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -33,11 +34,6 @@ public sealed class RegisterUserEndpoint(ISender sender) : Endpoint
         
         Result<Guid> result = await sender.Send(command, cancellationToken);
 
-        if (result.IsFailure)
-        {
-            return BadRequest(result.Error);
-        }
-        
-        return Ok(result.Value);
+        return result.IsFailure ? this.HandleFailure(result) : Ok(result.Value);
     }
 }
