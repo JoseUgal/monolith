@@ -1,0 +1,100 @@
+# CodeRabbit config for a modular monolith (.NET 9)
+# Goals: enforce Clean Architecture + DDD boundaries, good API semantics, and maintainable module growth.
+
+reviews:
+  auto_review: true
+  review_level: thorough
+
+  tone: concise
+  comment_style: inline
+
+  focus:
+    - clean architecture
+    - domain driven design
+    - separation of concerns
+    - modular monolith boundaries
+    - dependency direction
+    - maintainability
+    - testability
+    - security basics
+
+  guidelines:
+    # Architecture / modules
+    - Flag dependency direction issues (Domain should not depend on Infrastructure/Endpoints/App).
+    - Watch for cross-module coupling; prefer contracts/abstractions over direct references.
+    - Keep use-cases thin (Application orchestrates; Domain enforces invariants).
+    - Keep Infrastructure/Persistence behind interfaces.
+
+    # API / endpoints
+    - Endpoints should be orchestration only; no business rules.
+    - Validate REST semantics (status codes, Location on 201, ProblemDetails consistency).
+    - Ensure validation errors and domain errors map consistently to ProblemDetails.
+
+    # Data / persistence
+    - EF Core types should stay in Persistence/Infrastructure projects; avoid leaking into Domain.
+    - Suggest safer migrations/startup patterns and transactional consistency where relevant.
+
+    # Security
+    - Never store/return secrets (passwords); ensure hashing and safe error messages.
+
+    # Quality
+    - Suggest focused tests for critical flows and edge cases.
+
+  # Keep reviews focused on source code and important config; avoid hardcoding module names.
+  path_filters:
+    include:
+      - "App/**"
+      - "src/**"
+      - "**/*.cs"
+      - "**/*.csproj"
+      - "**/*.sln"
+      - "**/*.json"
+      - "**/*.yml"
+      - "**/*.yaml"
+      - "**/*.props"
+      - "**/*.targets"
+    exclude:
+      # Build artifacts
+      - "**/bin/**"
+      - "**/obj/**"
+      - "**/*.dll"
+      - "**/*.pdb"
+      - "**/*.deps.json"
+      - "**/*.runtimeconfig.json"
+      - "**/*.staticwebassets.*"
+      - "**/ref/**"
+      - "**/refint/**"
+      - "**/project.assets.json"
+      - "**/project.nuget.cache"
+      - "**/*.nuget.dgspec.json"
+      - "**/*.g.props"
+      - "**/*.g.targets"
+      - "**/*.AssemblyInfo.cs"
+      - "**/*.GlobalUsings.g.cs"
+      - "**/*.GeneratedMSBuildEditorConfig.editorconfig"
+      - "**/*.cache"
+      - "**/*.FileListAbsolute.txt"
+      - "**/*.Up2Date"
+      - "**/*.DotSettings.user"
+
+      # EF/Swagger generated noise
+      - "**/Migrations/**"
+      - "**/swagger.json"
+
+summaries:
+  enabled: true
+  format: "bullets"
+
+rules:
+  - name: "Layered boundaries"
+    description: "Domain must not reference Infrastructure/Persistence/Endpoints/App. Application should not depend on Endpoints."
+  - name: "Module boundaries"
+    description: "Modules should not depend on other modules' Infrastructure/Persistence directly; use contracts/abstractions."
+  - name: "API semantics"
+    description: "Correct HTTP codes, ProblemDetails consistency, no leaking exception details."
+  - name: "Persistence isolation"
+    description: "EF Core and DB concerns belong in Persistence/Infrastructure; avoid leaking persistence models into Domain."
+  - name: "Security"
+    description: "Hash passwords; don’t log/return sensitive data; avoid user enumeration via error messages."
+  - name: "Maintainability"
+    description: "Prefer small methods, clear naming, and consistent DI/composition patterns."
