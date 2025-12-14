@@ -8,7 +8,7 @@ namespace Modules.Users.Endpoints.Users.Update;
 public sealed class UpdateUserRequest
 {
     /// <summary>
-    /// Gets the user registration identifier.
+    /// Gets the user identifier.
     /// </summary>
     [FromRoute(Name = UserRoutes.ResourceId)]
     public Guid UserId { get; init; }

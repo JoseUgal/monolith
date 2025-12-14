@@ -24,6 +24,8 @@ public sealed class UserPassword : ValueObject
     /// Gets the maximum allowed length.
     /// </summary>
     public const int MaxLength = 128;
+    
+    public const int HashMaxLength = 200;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="UserPassword"/> class.

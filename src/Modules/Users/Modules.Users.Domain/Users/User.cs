@@ -1,5 +1,4 @@
 using Domain.Primitives;
-using Domain.Results;
 
 namespace Modules.Users.Domain.Users;
 

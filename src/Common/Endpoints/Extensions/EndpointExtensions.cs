@@ -54,18 +54,19 @@ public static class EndpointExtensions
 
     private static ProblemDetails CreateProblemDetails(string title, int status, Error error, Error[]? errors = null)
     {
-        return new ProblemDetails
+        var problemDetails = new ProblemDetails
         {
             Title = title,
             Status = status,
             Type = error.Code,
-            Detail = error.Description,
-            Extensions =
-            {
-                {
-                    nameof(errors), errors
-                }
-            }
+            Detail = error.Description
         };
+
+        if (errors is not null)
+        {
+            problemDetails.Extensions[nameof(errors)] = errors;
+        }
+        
+        return problemDetails;
     }
 }

@@ -19,14 +19,14 @@ public sealed class GetUserByIdEndpoint(ISender sender) : Endpoint
         Description = "Retrieves the details of a user identified by the specified unique identifier.",
         Tags = [UserRoutes.Tag]
     )]
-    public async Task<ActionResult<Guid>> HandleAsync(
+    public async Task<ActionResult<UserResponse>> HandleAsync(
         Guid userId,
         CancellationToken cancellationToken
     )
     {
-        var command = new GetUserByIdQuery(userId);
+        var query = new GetUserByIdQuery(userId);
         
-        Result<UserResponse> result = await sender.Send(command, cancellationToken);
+        Result<UserResponse> result = await sender.Send(query, cancellationToken);
 
         return result.IsFailure ? this.HandleFailure(result) : Ok(result.Value);
     }

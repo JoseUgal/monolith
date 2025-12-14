@@ -25,7 +25,7 @@ public sealed class UserRepository(UsersDbContext dbContext) : IUserRepository, 
     /// <inheritdoc />
     public async Task<User?> GetByIdAsync(UserId userId, CancellationToken cancellationToken = default)
     {
-        return await dbContext.Set<User>().SingleOrDefaultAsync(user => 
+        return await dbContext.Set<User>().FirstOrDefaultAsync(user => 
             user.Id == userId, 
             cancellationToken
         );

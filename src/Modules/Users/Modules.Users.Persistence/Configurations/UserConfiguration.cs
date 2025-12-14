@@ -47,7 +47,7 @@ internal sealed class UserConfiguration : IEntityTypeConfiguration<User>
 
         builder.Property(x => x.PasswordHash)
             .IsRequired()
-            .HasMaxLength(200);
+            .HasMaxLength(UserPassword.HashMaxLength);
 
         builder.Property<DateTime>(AuditableProperties.CreatedOnUtc).IsRequired();
         

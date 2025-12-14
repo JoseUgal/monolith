@@ -28,7 +28,7 @@ public static class ResultExtensions
         }
         
         value = result.Value;
-        error = null!;
+        error = Error.None;
         
         return true;
     }

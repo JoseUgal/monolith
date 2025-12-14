@@ -10,8 +10,8 @@ namespace Modules.Users.Application.Users.Register;
 /// <param name="LastName">The last name.</param>
 /// <param name="Password">The plain password.</param>
 public sealed record RegisterUserCommand(
+    string Email,
     string FirstName,
     string LastName,
-    string Email,
     string Password
 ) : ICommand<Guid>;

@@ -23,7 +23,7 @@ public interface IUserRepository
     /// Gets the user with the specified identifier, if it exists.
     /// </summary>
     /// <param name="userId">The user identifier.</param>
-    /// <param name="cancellationToken">The canellation token.</param>
+    /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns>The user if exists, otherwise a nullable value.</returns>
     Task<User?> GetByIdAsync(UserId userId, CancellationToken cancellationToken = default);
 }

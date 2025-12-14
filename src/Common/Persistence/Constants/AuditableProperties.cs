@@ -1,7 +1,7 @@
 namespace Persistence.Constants;
 
 /// <summary>
-/// Contains the name od the shadow properties used for auditing entities.
+/// Contains the name of the shadow properties used for auditing entities.
 /// </summary>
 /// <remarks>
 /// These properties are used in EF Core configurations and interceptors.

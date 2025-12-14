@@ -63,7 +63,7 @@ public sealed class UserFirstName : ValueObject
             return Result.Failure<UserFirstName>(
                 Error.Failure(
                     "User.FirstName.TooLong",
-                    "The user first name cannot be longer than " + MaxLength
+                    $"The user first name cannot be longer than {MaxLength} characters."
                 )
             );
         }

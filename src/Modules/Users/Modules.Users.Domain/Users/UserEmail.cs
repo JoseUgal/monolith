@@ -12,7 +12,7 @@ namespace Modules.Users.Domain.Users;
 /// The email is normalized to lowercase invariant for consistent
 /// comparisons and storage.
 /// </remarks>
-public sealed class UserEmail : ValueObject
+public sealed partial class UserEmail : ValueObject
 {
     /// <summary>
     /// Gets the maximum allowed length.
@@ -70,7 +70,7 @@ public sealed class UserEmail : ValueObject
             );
         }
 
-        if (!EmailRegex.IsMatch(normalized))
+        if (!EmailRegex().IsMatch(normalized))
         {
             return Result.Failure<UserEmail>(
                 Error.Failure(
@@ -84,6 +84,7 @@ public sealed class UserEmail : ValueObject
     }
 
     private static string Normalize(string email) => email.Trim().ToLowerInvariant();
-    
-    private static readonly Regex EmailRegex = new(@"^[^\s@]+@[^\s@]+\.[^\s@]+$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+
+    [GeneratedRegex(@"^[^\s@]+@[^\s@]+\.[^\s@]+$", RegexOptions.IgnoreCase)]
+    private static partial Regex EmailRegex();
 }
