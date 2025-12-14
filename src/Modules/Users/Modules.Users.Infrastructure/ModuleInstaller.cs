@@ -10,7 +10,14 @@ namespace Modules.Users.Infrastructure;
 /// </summary>
 public sealed class ModuleInstaller : IModuleInstaller
 {
-    /// <inheritdoc />
+    /// <summary>
+    /// Registers the Users module's services into the dependency injection container.
+    /// </summary>
+    /// <remarks>
+    /// Scans module and persistence assemblies and registers discovered implementations with appropriate lifetimes (singletons and scoped services).
+    /// </remarks>
+    /// <param name="services">The service collection to add registrations to.</param>
+    /// <param name="configuration">Configuration used when installing services from assemblies.</param>
     public void Install(IServiceCollection services, IConfiguration configuration)
     {
         services.InstallServicesFromAssemblies(configuration, AssemblyReference.Assembly);

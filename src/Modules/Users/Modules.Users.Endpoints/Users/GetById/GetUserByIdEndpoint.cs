@@ -11,6 +11,12 @@ namespace Modules.Users.Endpoints.Users.GetById;
 
 public sealed class GetUserByIdEndpoint(ISender sender) : Endpoint
 {
+    /// <summary>
+    /// Retrieves the details of a user specified by their unique identifier.
+    /// </summary>
+    /// <param name="userId">The unique identifier of the user to retrieve.</param>
+    /// <param name="cancellationToken">Cancellation token to cancel the operation.</param>
+    /// <returns>An ActionResult containing the UserResponse when the user is found, or an appropriate failure response (for example, 404 Not Found) when not.</returns>
     [HttpGet(UserRoutes.GetById)]
     [ProducesResponseType(typeof(UserResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]

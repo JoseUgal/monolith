@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
@@ -8,7 +8,10 @@ namespace Modules.Users.Persistence.Migrations
     /// <inheritdoc />
     public partial class CreateUsers : Migration
     {
-        /// <inheritdoc />
+        /// <summary>
+        /// Creates the "users" schema, adds a "users" table with columns for id, first name, last name, email (unique), password hash, created and modified timestamps, and creates a unique index on the email column.
+        /// </summary>
+        /// <param name="migrationBuilder">The <see cref="MigrationBuilder"/> used to define the schema and table operations.</param>
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.EnsureSchema(

@@ -30,7 +30,10 @@ public sealed class UserPassword : ValueObject
     /// <summary>
     /// Initializes a new instance of the <see cref="UserPassword"/> class.
     /// </summary>
-    /// <param name="value">The validated password.</param>
+    /// <summary>
+/// Initializes a new instance of <see cref="UserPassword"/> with a password that has already passed validation.
+/// </summary>
+/// <param name="value">The validated raw password value; intended for use by a hasher and not for direct storage.</param>
     private UserPassword(string value) => Value = value;
 
     /// <summary>
@@ -52,7 +55,11 @@ public sealed class UserPassword : ValueObject
     /// <returns>
     /// A <see cref="Result{T}"/> containing either a valid <see cref="UserPassword"/>
     /// or an error describing why validation failed.
-    /// </returns>
+    /// <summary>
+    /// Validates the given raw password against the user password policy and constructs a UserPassword when validation succeeds.
+    /// </summary>
+    /// <param name="password">The raw (unhashed) password to validate.</param>
+    /// <returns>A successful Result containing a UserPassword with the validated raw value when all checks pass; otherwise a failed Result with an Error indicating why validation failed (required, too short, too long, or weak).</returns>
     public static Result<UserPassword> Create(string password)
     {
         if (string.IsNullOrWhiteSpace(password))
@@ -98,6 +105,11 @@ public sealed class UserPassword : ValueObject
         return new UserPassword(password);
     }
 
+    /// <summary>
+    /// Determines whether the provided password meets the required complexity rules.
+    /// </summary>
+    /// <param name="password">The password to validate.</param>
+    /// <returns>`true` if the password contains at least one uppercase letter, one lowercase letter, one digit, and one special character; `false` otherwise.</returns>
     private static bool HasRequiredComplexity(string password)
     {
         bool hasUpper = Regex.IsMatch(password, "[A-Z]");
@@ -108,4 +120,3 @@ public sealed class UserPassword : ValueObject
         return hasUpper && hasLower && hasDigit && hasSpecial;
     }
 }
-

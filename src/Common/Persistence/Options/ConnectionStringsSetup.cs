@@ -14,6 +14,11 @@ internal sealed class ConnectionStringSetup(IConfiguration configuration) : ICon
 {
     private const string ConnectionStringName = "Database";
 
+    /// <summary>
+    /// Sets the ConnectionStringOptions.Value to the "Database" connection string from the application's configuration.
+    /// </summary>
+    /// <param name="options">The options instance to populate with the resolved connection string.</param>
+    /// <exception cref="InvalidOperationException">Thrown when the "Database" connection string is missing or consists only of whitespace.</exception>
     public void Configure(ConnectionStringOptions options)
     {
         string? connectionString = configuration.GetConnectionString(ConnectionStringName);
@@ -26,4 +31,3 @@ internal sealed class ConnectionStringSetup(IConfiguration configuration) : ICon
         options.Value = connectionString;
     }
 }
-

@@ -25,7 +25,10 @@ public sealed class UserLastName : ValueObject
     /// This constructor is intended for EF Core and mapping purposes only.
     /// It performs no validation. For domain-level creation and validation,
     /// use <see cref="Create(string)"/> instead.
-    /// </remarks>
+    /// <summary>
+/// Initializes a new instance of <see cref="UserLastName"/> with the specified value for persistence and mapping.
+/// </summary>
+/// <param name="value">The last name value to assign. This constructor does not perform validation and is intended for ORM/serialization use.</param>
     public UserLastName(string value) => Value = value;
     
     /// <summary>
@@ -33,7 +36,10 @@ public sealed class UserLastName : ValueObject
     /// </summary>
     public string Value { get; }
 
-    /// <inheritdoc />
+    /// <summary>
+/// Provides the atomic value used for equality comparisons of this value object.
+/// </summary>
+/// <returns>An enumerable containing a single element: the last name string.</returns>
     protected override IEnumerable<object> GetAtomicValues() => [Value];
 
     /// <summary>
@@ -43,6 +49,14 @@ public sealed class UserLastName : ValueObject
     /// <returns>
     /// A <see cref="Result{T}"/> containing either a valid <see cref="UserLastName"/>
     /// or an error describing why validation failed.
+    /// <summary>
+    /// Creates a validated <see cref="UserLastName"/> value object from the provided string.
+    /// </summary>
+    /// <param name="lastName">Candidate last name; leading and trailing whitespace are trimmed before validation.</param>
+    /// <returns>
+    /// A <see cref="Result{UserLastName}"/> containing the created <see cref="UserLastName"/> on success.
+    /// On failure, contains an <c>Error</c> with code <c>User.LastName.IsRequired</c> when the input is null, empty, or whitespace,
+    /// or <c>User.LastName.TooLong</c> when the trimmed input exceeds <see cref="MaxLength"/>.
     /// </returns>
     public static Result<UserLastName> Create(string lastName)
     {

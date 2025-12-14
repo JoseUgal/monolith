@@ -13,7 +13,12 @@ public sealed class UserRepository(UsersDbContext dbContext) : IUserRepository, 
     /// <inheritdoc />
     public void Add(User user) => dbContext.Add(user);
 
-    /// <inheritdoc />
+    /// <summary>
+    /// Checks whether the specified email is unique among all users.
+    /// </summary>
+    /// <param name="email">The email to check for uniqueness.</param>
+    /// <param name="cancellationToken">Token to cancel the operation.</param>
+    /// <returns>`true` if no existing user has the specified email, `false` otherwise.</returns>
     public async Task<bool> IsEmailUniqueAsync(UserEmail email, CancellationToken cancellationToken = default)
     {
         return !await dbContext.Set<User>().AnyAsync(user =>

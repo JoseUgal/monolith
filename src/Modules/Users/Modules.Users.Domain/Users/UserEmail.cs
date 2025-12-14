@@ -27,7 +27,10 @@ public sealed partial class UserEmail : ValueObject
     /// This constructor is intended for EF Core and mapping purposes only.
     /// It performs no validation. For domain-level creation and validation,
     /// use <see cref="Create(string)"/> instead.
-    /// </remarks>
+    /// <summary>
+/// Initializes a new <see cref="UserEmail"/> with the specified raw value.
+/// </summary>
+/// <param name="value">The email value to assign; expected to be already normalized. This constructor is intended for ORM mapping (e.g., EF Core) and performs no validation.</param>
     public UserEmail(string value) => Value = value;
 
     /// <summary>
@@ -45,6 +48,15 @@ public sealed partial class UserEmail : ValueObject
     /// <returns>
     /// A <see cref="Result{T}"/> containing either a valid <see cref="UserEmail"/>
     /// or an error describing why validation failed.
+    /// <summary>
+    /// Validates the provided email string, normalizes it, and constructs a UserEmail value object on success.
+    /// </summary>
+    /// <param name="email">The email address to validate and convert into a UserEmail. May include surrounding whitespace or mixed case; the value will be normalized.</param>
+    /// <returns>
+    /// A successful Result containing a UserEmail with a normalized (trimmed, lowercase) value when validation passes; otherwise a failed Result with one of:
+    /// - Error code "User.Email.IsRequired" when the input is null, empty, or whitespace.
+    /// - Error code "User.Email.TooLong" when the normalized email length exceeds 320 characters.
+    /// - Error code "User.Email.InvalidFormat" when the normalized email does not match the expected email pattern.
     /// </returns>
     public static Result<UserEmail> Create(string email)
     {
@@ -83,8 +95,17 @@ public sealed partial class UserEmail : ValueObject
         return new UserEmail(normalized);
     }
 
-    private static string Normalize(string email) => email.Trim().ToLowerInvariant();
+    /// <summary>
+/// Normalize an email by removing surrounding whitespace and converting to lowercase using the invariant culture.
+/// </summary>
+/// <param name="email">The input email to normalize.</param>
+/// <returns>The normalized email string.</returns>
+private static string Normalize(string email) => email.Trim().ToLowerInvariant();
 
+    /// <summary>
+    /// Provides a compiled regular expression for validating basic email address format.
+    /// </summary>
+    /// <returns>A <see cref="Regex"/> that matches the pattern <c>^[^\s@]+@[^\s@]+\.[^\s@]+$</c> using case-insensitive matching.</returns>
     [GeneratedRegex(@"^[^\s@]+@[^\s@]+\.[^\s@]+$", RegexOptions.IgnoreCase)]
     private static partial Regex EmailRegex();
 }

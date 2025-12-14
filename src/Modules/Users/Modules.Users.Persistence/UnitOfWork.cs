@@ -8,7 +8,10 @@ namespace Modules.Users.Persistence;
 /// </summary>
 public class UnitOfWork(UsersDbContext dbContext) : IUnitOfWork, IScoped
 {
-    /// <inheritdoc />
+    /// <summary>
+    /// Persists pending changes in the users database context.
+    /// </summary>
+    /// <param name="cancellationToken">Token to cancel the save operation.</param>
     public async Task SaveChangesAsync(CancellationToken cancellationToken = default)
     {
         await dbContext.SaveChangesAsync(cancellationToken);

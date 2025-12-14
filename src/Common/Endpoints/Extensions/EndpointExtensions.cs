@@ -16,7 +16,12 @@ public static class EndpointExtensions
     /// <param name="endpoint">The endpoint.</param>
     /// <param name="result">The failure result.</param>
     /// <returns>The appropriate response based on the result type.</returns>
-    /// <exception cref="InvalidOperationException"> when this method is invoked with a success result.</exception>
+    /// <summary>
+    /// Converts a failed <paramref name="result"/> into an appropriate HTTP <see cref="ActionResult"/> carrying a ProblemDetails payload.
+    /// </summary>
+    /// <param name="result">The failed Result to translate into an HTTP response.</param>
+    /// <returns>An ActionResult whose ProblemDetails describes the error: validation errors produce 400 Bad Request (with detailed errors), NotFound produces 404 Not Found, Conflict produces 409 Conflict, and other errors produce 400 Bad Request.</returns>
+    /// <exception cref="InvalidOperationException">Thrown when this method is invoked with a success result.</exception>
     public static ActionResult HandleFailure(this Endpoint endpoint, Result result)
     {
         if (result.IsSuccess)
@@ -52,6 +57,14 @@ public static class EndpointExtensions
         };
     }
 
+    /// <summary>
+    /// Builds a ProblemDetails object describing an error for an HTTP response.
+    /// </summary>
+    /// <param name="title">Human-readable title for the problem.</param>
+    /// <param name="status">HTTP status code to set on the ProblemDetails.</param>
+    /// <param name="error">Primary error; its Code is set as the ProblemDetails `Type` and its Description as the `Detail`.</param>
+    /// <param name="errors">Optional additional error objects to include in ProblemDetails.Extensions under the key "errors".</param>
+    /// <returns>A ProblemDetails instance populated with the provided title, status, type, detail, and optional errors extension.</returns>
     private static ProblemDetails CreateProblemDetails(string title, int status, Error error, Error[]? errors = null)
     {
         var problemDetails = new ProblemDetails

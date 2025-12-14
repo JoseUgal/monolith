@@ -16,7 +16,14 @@ internal sealed class RegisterUserCommandHandler(
     IUnitOfWork  unitOfWork
 ) : ICommandHandler<RegisterUserCommand, Guid>
 {
-    /// <inheritdoc />
+    /// <summary>
+    /// Handles a RegisterUserCommand to validate input, create a new user, ensure the email is unique, persist the user, and produce the created user's identifier.
+    /// </summary>
+    /// <param name="command">Command containing the user's first name, last name, email, and password.</param>
+    /// <param name="cancellationToken">Token to observe while awaiting repository and unit-of-work operations.</param>
+    /// <returns>
+    /// A successful Result containing the created user's <see cref="Guid"/> identifier when registration succeeds; a failure Result containing a domain validation error or an email-uniqueness error otherwise.
+    /// </returns>
     public async Task<Result<Guid>> Handle(RegisterUserCommand command, CancellationToken cancellationToken)
     {
         if (!UserFirstName.Create(command.FirstName).TryGetValue(out UserFirstName firstName, out Error error))

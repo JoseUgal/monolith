@@ -20,6 +20,10 @@ internal sealed class UserConfiguration : IEntityTypeConfiguration<User>
         ConfigureIndexes(builder);
     }
 
+    /// <summary>
+    /// Configures the User entity's table mapping, primary key, property constraints, and value-object conversions, and defines the auditable timestamp columns.
+    /// </summary>
+    /// <param name="builder">The EntityTypeBuilder for the User entity used to define table name, key, properties, conversions, and auditable columns.</param>
     private static void ConfigureDataStructure(EntityTypeBuilder<User> builder)
     {
         builder.ToTable(TableNames.Users);
@@ -54,6 +58,10 @@ internal sealed class UserConfiguration : IEntityTypeConfiguration<User>
         builder.Property<DateTime?>(AuditableProperties.ModifiedOnUtc).IsRequired(false);
     }
     
+    /// <summary>
+    /// Configures database indexes for the User entity, including a unique index on the Email column.
+    /// </summary>
+    /// <param name="builder">The EntityTypeBuilder for the User entity.</param>
     private static void ConfigureIndexes(EntityTypeBuilder<User> builder)
     {
         builder.HasIndex(x => x.Email).IsUnique();

@@ -25,7 +25,13 @@ public sealed class UserFirstName : ValueObject
     /// This constructor is intended for EF Core and mapping purposes only.
     /// It performs no validation. For domain-level creation and validation,
     /// use <see cref="Create(string)"/> instead.
-    /// </remarks>
+    /// <summary>
+/// Initializes a new instance of <see cref="UserFirstName"/> with the specified raw value for persistence/mapping scenarios.
+/// </summary>
+/// <param name="value">The stored first name value (may be unvalidated and is used for ORM mapping such as EF Core).</param>
+/// <remarks>
+/// This constructor does not perform domain validation and exists to support persistence frameworks. Use <see cref="Create(string)"/> to construct a validated instance.
+/// </remarks>
     public UserFirstName(string value) => Value = value;
     
     /// <summary>
@@ -33,7 +39,10 @@ public sealed class UserFirstName : ValueObject
     /// </summary>
     public string Value { get; }
 
-    /// <inheritdoc />
+    /// <summary>
+/// Provides the sequence of atomic values used to determine equality for this value object.
+/// </summary>
+/// <returns>An enumerable containing the underlying first name value.</returns>
     protected override IEnumerable<object> GetAtomicValues() => [Value];
 
     /// <summary>
@@ -43,7 +52,11 @@ public sealed class UserFirstName : ValueObject
     /// <returns>
     /// A <see cref="Result{T}"/> containing either a valid <see cref="UserFirstName"/>
     /// or an error describing why validation failed.
-    /// </returns>
+    /// <summary>
+    /// Creates a validated UserFirstName from the given string.
+    /// </summary>
+    /// <param name="firstName">Candidate first name; leading and trailing whitespace are removed before validation.</param>
+    /// <returns>A successful Result containing the created UserFirstName when validation passes; otherwise a failed Result with an Error describing the validation failure.</returns>
     public static Result<UserFirstName> Create(string firstName)
     {
         if (string.IsNullOrWhiteSpace(firstName))

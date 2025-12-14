@@ -12,6 +12,12 @@ namespace Modules.Users.Endpoints.Users.Register;
 
 public sealed class RegisterUserEndpoint(ISender sender) : Endpoint
 {
+    /// <summary>
+    /// Registers a new user using the information in the request.
+    /// </summary>
+    /// <param name="request">Registration details including first name, last name, email, and password.</param>
+    /// <param name="cancellationToken">Token to cancel the operation.</param>
+    /// <returns>The created user's Guid if registration succeeds; otherwise an <see cref="ActionResult"/> representing the failure.</returns>
     [HttpPost(UserRoutes.Register)]
     [ProducesResponseType(typeof(Guid), StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]

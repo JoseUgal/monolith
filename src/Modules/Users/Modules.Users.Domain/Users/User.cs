@@ -11,7 +11,14 @@ public sealed class User : Entity<UserId>
     /// <param name="firstName">The first name.</param>
     /// <param name="lastName">The last name.</param>
     /// <param name="email">The email.</param>
-    /// <param name="passwordHash">The password hash.</param>
+    /// <summary>
+    /// Initializes a new User with the specified identifier, name value objects, email, and password hash.
+    /// </summary>
+    /// <param name="id">The user's unique identifier.</param>
+    /// <param name="firstName">The user's first name value object.</param>
+    /// <param name="lastName">The user's last name value object.</param>
+    /// <param name="email">The user's email value object.</param>
+    /// <param name="passwordHash">The hashed password for the user.</param>
     private User(UserId id, UserFirstName firstName, UserLastName lastName, UserEmail email, string passwordHash) : base(id)
     {
         FirstName = firstName;
@@ -46,7 +53,14 @@ public sealed class User : Entity<UserId>
     /// <remarks>
     /// The method generates a new <see cref="UserId"/> for the entity.
     /// All value objects should be validated in this method.
-    /// </remarks>
+    /// <summary>
+    /// Creates a new User with a generated identifier and the provided name, email, and password hash.
+    /// </summary>
+    /// <param name="firstName">The user's first name value object.</param>
+    /// <param name="lastName">The user's last name value object.</param>
+    /// <param name="email">The user's email value object.</param>
+    /// <param name="passwordHash">The hashed password for the user.</param>
+    /// <returns>A new User instance with a newly generated UserId and the supplied data.</returns>
     public static User Create(UserFirstName firstName, UserLastName lastName, UserEmail email, string passwordHash)
     {
         var id = new UserId(Guid.NewGuid());
@@ -58,7 +72,11 @@ public sealed class User : Entity<UserId>
     /// Changes the user's basic information.
     /// </summary>
     /// <param name="firstName">The first name.</param>
-    /// <param name="lastName">The last name.</param>
+    /// <summary>
+    /// Updates the user's first and last name.
+    /// </summary>
+    /// <param name="firstName">The new first name.</param>
+    /// <param name="lastName">The new last name.</param>
     public void Change(UserFirstName firstName, UserLastName lastName)
     {
         FirstName = firstName;

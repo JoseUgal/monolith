@@ -9,7 +9,9 @@ namespace Modules.Users.Infrastructure.ServiceInstallers;
 /// </summary>
 internal sealed class EndpointsServiceInstaller : IServiceInstaller
 {
-    /// <inheritdoc />
+    /// <summary>
+    /// Registers MVC controllers from the module's Endpoints assembly into the application's service collection.
+    /// </summary>
     public void Install(IServiceCollection services, IConfiguration configuration)
     {
         services.AddControllers().AddApplicationPart(Endpoints.AssemblyReference.Assembly);

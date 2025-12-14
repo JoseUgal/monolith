@@ -8,7 +8,10 @@ namespace Modules.Users.Persistence;
 /// </summary>
 public sealed class UsersDbContext(DbContextOptions<UsersDbContext> options) : DbContext(options)
 {
-    /// <inheritdoc />
+    /// <summary>
+    /// Configures the EF Core model: sets the default schema to the users schema and applies entity configurations from the module assembly.
+    /// </summary>
+    /// <param name="modelBuilder">The builder used to configure entity types, relationships, and mappings.</param>
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.HasDefaultSchema(Schemas.Users);

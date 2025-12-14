@@ -11,6 +11,11 @@ namespace Modules.Users.Endpoints.Users.Update;
 
 public sealed class UpdateUserEndpoint(ISender sender) : Endpoint
 {
+    /// <summary>
+    /// Updates a user's basic profile information.
+    /// </summary>
+    /// <param name="request">Request containing the target user's identifier and the new first and last name values.</param>
+    /// <returns>`NoContent` (204) on success; otherwise an error response produced by failure handling.</returns>
     [HttpPut(UserRoutes.Update)]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]

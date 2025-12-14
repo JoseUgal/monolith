@@ -12,7 +12,9 @@ namespace Modules.Users.Infrastructure.ServiceInstallers;
 /// </summary>
 internal sealed class InfrastructureServiceInstaller : IServiceInstaller
 {
-    /// <inheritdoc />
+    /// <summary>
+    /// Registers infrastructure services for the Users module by adding a transient mapping from <c>ISystemTime</c> to <c>SystemTime</c> if no existing registration is present.
+    /// </summary>
     public void Install(IServiceCollection services, IConfiguration configuration)
     {
         services.TryAddTransient<ISystemTime, SystemTime>();

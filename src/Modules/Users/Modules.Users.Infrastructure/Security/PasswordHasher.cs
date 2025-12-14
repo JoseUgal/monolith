@@ -17,7 +17,11 @@ public class PasswordHasher : IPasswordHasher, ISingleton
     
     private static readonly HashAlgorithmName Algorithm = HashAlgorithmName.SHA512;
 
-    /// <inheritdoc />
+    /// <summary>
+    /// Generate a salted PBKDF2-SHA512 hash for the specified password.
+    /// </summary>
+    /// <param name="password">The plaintext password to hash.</param>
+    /// <returns>The derived hash and salt encoded as hexadecimal strings joined by a hyphen in the format &lt;hash-hex&gt;-&lt;salt-hex&gt;.</returns>
     public string Hash(string password)
     {
         byte[] salt = RandomNumberGenerator.GetBytes(SaltSize);

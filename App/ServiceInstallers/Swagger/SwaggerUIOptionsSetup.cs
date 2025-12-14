@@ -8,7 +8,10 @@ namespace App.ServiceInstallers.Swagger;
 /// </summary>
 internal sealed class SwaggerUIOptionsSetup : IConfigureOptions<SwaggerUIOptions>
 {
-    /// <inheritdoc />
+    /// <summary>
+    /// Enables display of request durations in the Swagger UI.
+    /// </summary>
+    /// <param name="options">The Swagger UI options to configure.</param>
     public void Configure(SwaggerUIOptions options)
     {
         options.DisplayRequestDuration();

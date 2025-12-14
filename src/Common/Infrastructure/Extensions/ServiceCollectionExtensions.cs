@@ -45,6 +45,10 @@ public static class ServiceCollectionExtensions
     /// <param name="services">The <see cref="IServiceCollection"/> to register the modules into.</param>
     /// <param name="configuration">The <see cref="IConfiguration"/> to provide configuration values.</param>
     /// <param name="assemblies">One or more assemblies to scan for <see cref="IModuleInstaller"/> implementations.</param>
+    /// <summary>
+    /// Executes all IModuleInstaller implementations found in the provided assemblies to register module services into the service collection.
+    /// </summary>
+    /// <param name="assemblies">Assemblies to scan for implementations of <see cref="IModuleInstaller"/>.</param>
     /// <returns>The same <see cref="IServiceCollection"/> instance to allow chaining.</returns>
     public static IServiceCollection InstallModulesFromAssemblies(
         this IServiceCollection services,
@@ -67,6 +71,10 @@ public static class ServiceCollectionExtensions
     /// </summary>
     /// <param name="services">The <see cref="IServiceCollection"/> to add the services to.</param>
     /// <param name="assembly">The assembly to scan for transient services.</param>
+    /// <summary>
+    /// Registers all non-abstract classes in the specified assembly that implement <c>ITransient</c> as their matching interfaces (by name) with transient lifetime.
+    /// </summary>
+    /// <param name="assembly">The assembly to scan for classes that implement <c>ITransient</c>.</param>
     /// <returns>The same <see cref="IServiceCollection"/> instance so that multiple calls can be chained.</returns>
     public static IServiceCollection AddTransientAsMatchingInterfaces(
         this IServiceCollection services,
@@ -90,6 +98,10 @@ public static class ServiceCollectionExtensions
     /// </summary>
     /// <param name="services">The <see cref="IServiceCollection"/> to add the services to.</param>
     /// <param name="assembly">The assembly to scan for scoped services.</param>
+    /// <summary>
+    /// Registers all classes in the provided assembly that implement <see cref="IScoped"/> as their matching interfaces (by name) with scoped lifetime.
+    /// </summary>
+    /// <param name="assembly">The assembly to scan for types implementing <see cref="IScoped"/>.</param>
     /// <returns>The same <see cref="IServiceCollection"/> instance so that multiple calls can be chained.</returns>
     public static IServiceCollection AddScopedAsMatchingInterfaces(
         this IServiceCollection services,
@@ -113,6 +125,10 @@ public static class ServiceCollectionExtensions
     /// </summary>
     /// <param name="services">The <see cref="IServiceCollection"/> to add the services to.</param>
     /// <param name="assembly">The assembly to scan for singleton services.</param>
+    /// <summary>
+    /// Registers all concrete types in the specified assembly that implement <c>ISingleton</c> as their matching interfaces (by name) with singleton lifetime.
+    /// </summary>
+    /// <param name="assembly">The assembly to scan for types that implement <c>ISingleton</c>.</param>
     /// <returns>The same <see cref="IServiceCollection"/> instance so that multiple calls can be chained.</returns>
     public static IServiceCollection AddSingletonAsMatchingInterfaces(
         this IServiceCollection services,
