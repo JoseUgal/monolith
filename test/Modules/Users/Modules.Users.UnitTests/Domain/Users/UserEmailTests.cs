@@ -16,7 +16,7 @@ public sealed class UserEmailTests
 
         // Assert
         Assert.True(result.IsFailure);
-        Assert.Equal(UserErrors.Email.IsRequired.Code, result.Error.Code);
+        Assert.Equal(UserErrors.Email.IsRequired, result.Error);
     }
 
     [Fact]
@@ -32,7 +32,7 @@ public sealed class UserEmailTests
 
         // Assert
         Assert.True(result.IsFailure);
-        Assert.Equal(UserErrors.Email.TooLong(UserEmail.MaxLength).Code, result.Error.Code);
+        Assert.Equal(UserErrors.Email.TooLong(UserEmail.MaxLength), result.Error);
     }
 
     [Fact]
@@ -46,7 +46,7 @@ public sealed class UserEmailTests
 
         // Assert
         Assert.True(result.IsFailure);
-        Assert.Equal(UserErrors.Email.InvalidFormat.Code, result.Error.Code);
+        Assert.Equal(UserErrors.Email.InvalidFormat, result.Error);
     }
 
     [Fact]

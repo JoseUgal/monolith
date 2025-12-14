@@ -14,7 +14,7 @@ internal static class UserMother
         passwordHash ??= "8a24367a1f46c141048752f2d5bbd14b";
         
         UserFirstName userFirstName = UserFirstName.Create(firstName ?? "Ana").Value;
-        UserLastName userLastName = UserLastName.Create(lastName ?? "Garcia").Value;;
+        UserLastName userLastName = UserLastName.Create(lastName ?? "Garcia").Value;
         UserEmail userEmail = UserEmail.Create(email ?? "ana@demo.es").Value;
         
         return User.Create(userFirstName, userLastName, userEmail, passwordHash);

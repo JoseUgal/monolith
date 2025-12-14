@@ -96,7 +96,7 @@ public static class UserErrors
         /// </summary>
         /// <param name="maxLength">The maximum allowed length for the email.</param>
         public static Error TooLong(int maxLength) => Error.Failure(
-            "User.LastName.TooLong",
+            "User.Email.TooLong",
             $"The user email cannot be longer than {maxLength} characters."
         );
     }
@@ -107,7 +107,7 @@ public static class UserErrors
     public static class Password
     {
         /// <summary>
-        /// Indicates that the user's email is required.
+        /// Indicates that the user's password is required.
         /// </summary>
         public static Error IsRequired => Error.Failure(
             "User.Password.IsRequired",
