@@ -54,4 +54,15 @@ public sealed class User : Entity<UserId>
         
         return new User(id, firstName, lastName, email, passwordHash);
     }
+
+    /// <summary>
+    /// Changes the user's basic information.
+    /// </summary>
+    /// <param name="firstName">The first name.</param>
+    /// <param name="lastName">The last name.</param>
+    public void Change(UserFirstName firstName, UserLastName lastName)
+    {
+        FirstName = firstName;
+        LastName = lastName;
+    }
 }

@@ -8,7 +8,9 @@ internal static class UserRoutes
 
     internal const string ResourceId = "userId";
 
+    internal const string Register = $"{BaseUri}/register";
+    
     internal const string GetById = $"{BaseUri}/{{{ResourceId}:guid}}";
     
-    internal const string Register = $"{BaseUri}/register";
+    internal const string Update = $"{BaseUri}/{{{ResourceId}:guid}}";
 }
