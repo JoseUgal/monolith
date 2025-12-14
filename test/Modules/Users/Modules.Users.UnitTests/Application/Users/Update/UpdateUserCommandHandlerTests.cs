@@ -18,9 +18,7 @@ public sealed class UpdateUserCommandHandlerTests
         
         UpdateUserCommand command = sut.ValidCommand(userId);
 
-        sut.UserRepositoryMock.Setup(x => 
-                x.GetByIdAsync(It.IsAny<UserId>(), It.IsAny<CancellationToken>())
-        ).ReturnsAsync((User?)null);
+        sut.SetupUserNotFound();
 
         // Act
         Result result = await sut.Handler.Handle(command, CancellationToken.None);
@@ -43,9 +41,7 @@ public sealed class UpdateUserCommandHandlerTests
 
         UpdateUserCommand command = sut.ValidCommand(userId) with { FirstName = "" };
 
-        sut.UserRepositoryMock.Setup(x =>
-            x.GetByIdAsync(It.IsAny<UserId>(), It.IsAny<CancellationToken>())
-        ).ReturnsAsync(UserMother.Create()); 
+        sut.SetupUserExists();
         
         // Act
         Result result = await sut.Handler.Handle(command, CancellationToken.None);
@@ -67,9 +63,7 @@ public sealed class UpdateUserCommandHandlerTests
 
         UpdateUserCommand command = sut.ValidCommand(userId) with { LastName = "" };
 
-        sut.UserRepositoryMock.Setup(x =>
-            x.GetByIdAsync(It.IsAny<UserId>(), It.IsAny<CancellationToken>())
-        ).ReturnsAsync(UserMother.Create()); 
+        sut.SetupUserExists();
         
         // Act
         Result result = await sut.Handler.Handle(command, CancellationToken.None);
@@ -93,12 +87,10 @@ public sealed class UpdateUserCommandHandlerTests
 
         User user = UserMother.Create();
 
-        sut.UserRepositoryMock.Setup(x => 
-                x.GetByIdAsync(It.IsAny<UserId>(), It.IsAny<CancellationToken>())
-        ).ReturnsAsync(user);
+        sut.SetupUserExists(user);
 
         sut.UnitOfWorkMock.Setup(x => 
-                x.SaveChangesAsync(It.IsAny<CancellationToken>())
+            x.SaveChangesAsync(It.IsAny<CancellationToken>())
         ).Returns(Task.CompletedTask);
 
         // Act

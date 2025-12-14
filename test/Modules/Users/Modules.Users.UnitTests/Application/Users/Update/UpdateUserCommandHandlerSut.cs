@@ -1,6 +1,7 @@
 using Modules.Users.Application.Users.Update;
 using Modules.Users.Domain;
 using Modules.Users.Domain.Users;
+using Modules.Users.UnitTests.Common.Mothers;
 using Moq;
 
 namespace Modules.Users.UnitTests.Application.Users.Update;
@@ -26,6 +27,22 @@ internal sealed class UpdateUserCommandHandlerSut
         "Juan",
         "Pérez"
     );
+
+    public void SetupUserNotFound()
+    {
+        UserRepositoryMock.Setup(x => 
+            x.GetByIdAsync(It.IsAny<UserId>(), It.IsAny<CancellationToken>())
+        ).ReturnsAsync((User?)null);
+    }
+
+    public void SetupUserExists(User? user = null)
+    {
+        user ??= UserMother.Create();
+        
+        UserRepositoryMock.Setup(x =>
+            x.GetByIdAsync(It.IsAny<UserId>(), It.IsAny<CancellationToken>())
+        ).ReturnsAsync(user); 
+    }
 
     public void VerifyDidNotSave()
     {
