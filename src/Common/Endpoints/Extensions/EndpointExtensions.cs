@@ -43,7 +43,7 @@ public static class EndpointExtensions
             ErrorType.NotFound => endpoint.NotFound(
                 CreateProblemDetails("Not Found", StatusCodes.Status404NotFound, result.Error)
             ),
-            ErrorType.Conflict => endpoint.NotFound(
+            ErrorType.Conflict => endpoint.Conflict(
                 CreateProblemDetails("Conflict", StatusCodes.Status409Conflict, result.Error)
             ),
             _ => endpoint.BadRequest(
