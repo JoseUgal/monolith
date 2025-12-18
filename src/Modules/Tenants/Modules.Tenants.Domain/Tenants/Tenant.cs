@@ -42,13 +42,18 @@ public sealed class Tenant : Entity<TenantId>
     /// The method generates a new <see cref="TenantId"/> for the entity.
     /// All value objects should be validated in this method.
     /// </remarks>
-    public static Tenant Create(TenantName name, TenantSlug slug, Guid ownerId)
+    public static Result<Tenant> Create(TenantName name, TenantSlug slug, Guid ownerId)
     {
         var id = new TenantId(Guid.NewGuid());
         
         var tenant = new Tenant(id, name, slug);
 
-        tenant.AddOwner(ownerId);
+        Result result = tenant.AddOwner(ownerId);
+
+        if (result.IsFailure)
+        {
+            return Result.Failure<Tenant>(result.Error);
+        }
         
         return tenant;
     }
