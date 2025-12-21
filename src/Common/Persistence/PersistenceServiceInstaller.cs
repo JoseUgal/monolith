@@ -1,4 +1,5 @@
 using Infrastructure.Configuration;
+using Infrastructure.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Persistence.Options;
@@ -14,5 +15,9 @@ internal sealed class PersistenceServiceInstaller : IServiceInstaller
     public void Install(IServiceCollection services, IConfiguration configuration)
     {
         services.ConfigureOptions<ConnectionStringSetup>();
+
+        services.AddTransientAsMatchingInterfaces(AssemblyReference.Assembly);
+        
+        Dapper.DefaultTypeMap.MatchNamesWithUnderscores = true;
     }
 }
