@@ -39,4 +39,13 @@ public sealed class TenantRepository(TenantsDbContext dbContext) : ITenantReposi
             cancellationToken
         );
     }
+
+    /// <inheritdoc />
+    public async Task<Tenant?> GetWithMembershipsAsync(TenantId tenantId, CancellationToken cancellationToken = default)
+    {
+        return await dbContext.Set<Tenant>().Include(tenant => tenant.Memberships).FirstOrDefaultAsync(tenant =>
+            tenant.Id == tenantId,
+            cancellationToken
+        );
+    }
 }

@@ -36,4 +36,15 @@ public interface ITenantRepository
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns>The success result if the tenant exists, otherwise a failure result.</returns>
     Task<bool> ExistsAsync(TenantId tenantId, CancellationToken cancellationToken = default);
+    
+    /// <summary>
+    /// Gets the tenant with the specified identifier.
+    /// </summary>
+    /// <param name="tenantId">The tenant identifier.</param>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <returns>The tenant with the specified identifier.</returns>
+    /// <remarks>
+    /// This method returns the tenant with its memberships.
+    /// </remarks>
+    Task<Tenant?> GetWithMembershipsAsync(TenantId tenantId, CancellationToken cancellationToken = default);
 }
