@@ -50,6 +50,13 @@ public record Error(string Code, string Description, ErrorType Type)
     public static Error Conflict(string code, string description) => new(code, description, ErrorType.Conflict);
 
     /// <summary>
+    /// Initializes a new instance of the <see cref="Error"/> class with forbidden type.
+    /// </summary>
+    /// <param name="code">The error code.</param>
+    /// <param name="description">The error description.</param>
+    public static Error Forbidden(string code, string description) => new(code, description, ErrorType.Forbidden);
+
+    /// <summary>
     /// Returns a copy of the current error with a new code.
     /// </summary>
     /// <param name="code">The new error code.</param>

@@ -20,7 +20,7 @@ public sealed class GetMineTenantsEndpoint(ISender sender) : Endpoint
     )]
     public async Task<ActionResult> HandleAsync(CancellationToken cancellationToken = default)
     {
-        // TODO: Gets the user identifier from CurrentUser.
+        // TODO: CurrentUser
         var userId = Guid.Parse("7c2fd1d9-db1c-443a-a7e9-f2d106d6a04e");
 
         var query = new GetTenantsForUserQuery(userId);

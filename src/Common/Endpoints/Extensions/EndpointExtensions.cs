@@ -46,6 +46,10 @@ public static class EndpointExtensions
             ErrorType.Conflict => endpoint.Conflict(
                 CreateProblemDetails("Conflict", StatusCodes.Status409Conflict, result.Error)
             ),
+            ErrorType.Forbidden => endpoint.StatusCode(
+                StatusCodes.Status403Forbidden,
+                CreateProblemDetails("Forbidden", StatusCodes.Status403Forbidden, result.Error)
+            ),
             _ => endpoint.BadRequest(
                 CreateProblemDetails("Bad Request", StatusCodes.Status400BadRequest, result.Error)
             )

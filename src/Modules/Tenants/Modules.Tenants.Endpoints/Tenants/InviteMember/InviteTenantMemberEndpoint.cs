@@ -24,9 +24,12 @@ public sealed class InviteTenantMemberEndpoint(ISender sender) : Endpoint
     )]
     public async Task<ActionResult> HandleAsync(Guid tenantId, [FromBody] InviteTenantMemberRequest request, CancellationToken cancellationToken = default)
     {
+        // TODO: CurrentUser
+        var userId = Guid.Parse("7c2fd1d9-db1c-443a-a7e9-f2d106d6a04e");
+        
         var command = new InviteTenantMemberCommand(
             tenantId,
-            Guid.Parse("7c2fd1d9-db1c-443a-a7e9-f2d106d6a04e"),
+            userId,
             request.UserId,
             request.Role
         );

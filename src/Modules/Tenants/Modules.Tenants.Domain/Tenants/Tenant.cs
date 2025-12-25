@@ -61,6 +61,9 @@ public sealed class Tenant : Entity<TenantId>
     /// <summary>
     /// Invites a user to this tenant with a role.
     /// </summary>
+    /// <param name="userId">The identifier of the user.</param>
+    /// <param name="role">The role.</param>
+    /// <returns>The result of the operation.</returns>
     public Result<TenantMembership> InviteMember(Guid userId, TenantRole role)
     {
         if (_memberships.Any(m => m.UserId == userId))
@@ -76,10 +79,39 @@ public sealed class Tenant : Entity<TenantId>
 
         return membership;
     }
+
+    /// <summary>
+    /// Accepts the invitation for the specified tenant membership.
+    /// </summary>
+    /// <param name="membershipId">The identifier of the tenant membership.</param>
+    /// <param name="userId">The identifier of the user.</param>
+    /// <returns>The result of the operation.</returns>
+    public Result AcceptInvitation(TenantMembershipId membershipId, Guid userId)
+    {
+        TenantMembership? membership = _memberships.SingleOrDefault(m => m.Id == membershipId);
+
+        if (membership == null)
+        {
+            return Result.Failure(
+                TenantMembershipErrors.NotFound(membershipId)    
+            );
+        }
+
+        if (membership.UserId != userId)
+        {
+            return Result.Failure(
+                TenantMembershipErrors.Invitation.NotForUser    
+            );
+        }
+
+        return membership.Accept();
+    }
     
     /// <summary>
     /// Adds the first Owner membership for this tenant.
     /// </summary>
+    /// <param name="userId">The identifier of the user.</param>
+    /// <returns>The result of the operation.</returns>
     private Result AddOwner(Guid userId)
     {
         if (_memberships.Count != 0)

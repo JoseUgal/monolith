@@ -1,4 +1,5 @@
 using Domain.Primitives;
+using Domain.Results;
 using Modules.Tenants.Domain.Tenants;
 
 namespace Modules.Tenants.Domain.TenantMemberships;
@@ -74,5 +75,30 @@ public sealed class TenantMembership : Entity<TenantMembershipId>
             role,
             TenantMembershipStatus.Invited
         );
+    }
+
+    /// <summary>
+    /// Accepts the invitation for this tenant membership.
+    /// </summary>
+    /// <returns>The result of the operation.</returns>
+    public Result Accept()
+    {
+        if (Status == TenantMembershipStatus.Active)
+        {
+            return Result.Failure(
+                TenantMembershipErrors.Invitation.AlreadyAccepted    
+            );
+        }
+
+        if (Status != TenantMembershipStatus.Invited)
+        {
+            return Result.Failure(
+                TenantMembershipErrors.Invitation.InvalidStatus    
+            );
+        }
+        
+        Status = TenantMembershipStatus.Active;
+        
+        return Result.Success();
     }
 }
