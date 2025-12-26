@@ -3,7 +3,7 @@ using Modules.Tenants.Domain.Tenants;
 
 namespace Modules.Tenants.Domain.Tests.Common.Mothers;
 
-internal static class TenantMother
+public static class TenantMother
 {
     public static Tenant Create(
         string? name = null,
