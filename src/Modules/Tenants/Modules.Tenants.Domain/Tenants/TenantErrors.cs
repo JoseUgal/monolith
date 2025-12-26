@@ -107,7 +107,7 @@ public static class TenantErrors
         );
 
         /// <summary>
-        /// Indicates that the tenant's name exceeds the maximum allowed length.
+        /// Indicates that the tenant's slug exceeds the maximum allowed length.
         /// </summary>
         /// <param name="maxLength">The maximum allowed length for the tenant slug.</param>
         public static Error TooLong(int maxLength) => Error.Failure(

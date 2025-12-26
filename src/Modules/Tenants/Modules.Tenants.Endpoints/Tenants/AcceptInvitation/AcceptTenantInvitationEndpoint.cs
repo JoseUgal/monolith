@@ -4,8 +4,6 @@ using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Modules.Tenants.Application.Tenants.AcceptInvitation;
-using Modules.Tenants.Application.Tenants.InviteMember;
-using Modules.Tenants.Endpoints.Tenants.InviteMember;
 using Swashbuckle.AspNetCore.Annotations;
 using Endpoint = Endpoints.Endpoint;
 

@@ -21,7 +21,7 @@ public class TenantNameTests
     }
     
     [Fact]
-    public void Create_TooLong_ReturnsToLong()
+    public void Create_TooLong_ReturnsTooLong()
     {
         // Arrange
         string input = new('a', TenantName.MaxLength + 1);

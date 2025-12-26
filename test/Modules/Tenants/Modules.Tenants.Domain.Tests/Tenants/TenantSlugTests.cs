@@ -21,7 +21,7 @@ public class TenantSlugTests
     }
     
     [Fact]
-    public void Create_TooLong_ReturnsToLong()
+    public void Create_TooLong_ReturnsTooLong()
     {
         // Arrange
         string input = new('a', TenantSlug.MaxLength + 1);
@@ -35,7 +35,7 @@ public class TenantSlugTests
     }
     
     [Fact]
-    public void Create_TooShort_ReturnsToShort()
+    public void Create_TooShort_ReturnsTooShort()
     {
         // Arrange
         string input = new('a', TenantSlug.MinLength - 1);

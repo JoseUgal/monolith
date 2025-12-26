@@ -26,10 +26,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="TenantMemberships\" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\..\..\..\src\Modules\Tenants\Modules.Tenants.Domain\Modules.Tenants.Domain.csproj" />
     </ItemGroup>
 
