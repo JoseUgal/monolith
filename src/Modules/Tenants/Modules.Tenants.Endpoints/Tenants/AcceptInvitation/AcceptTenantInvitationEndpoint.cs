@@ -15,7 +15,7 @@ namespace Modules.Tenants.Endpoints.Tenants.AcceptInvitation;
 public sealed class AcceptTenantInvitationEndpoint(ISender sender) : Endpoint
 {
     [HttpPost(TenantRoutes.AcceptInvitation, Name = nameof(AcceptTenantInvitationEndpoint))]
-    [ProducesResponseType(typeof(Guid), StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status409Conflict)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]

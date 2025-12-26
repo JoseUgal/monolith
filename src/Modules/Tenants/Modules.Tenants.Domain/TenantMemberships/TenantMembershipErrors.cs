@@ -40,7 +40,7 @@ public static class TenantMembershipErrors
         /// </summary>
         public static Error AlreadyAccepted => Error.Conflict(
             "TenantMembership.Invitation.AlreadyAccepted",
-            "The tenant membership invitations is already accepted."
+            "The tenant membership invitation is already accepted."
         );
         
         /// <summary>

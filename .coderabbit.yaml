@@ -1,14 +1,12 @@
 # CodeRabbit config for a modular monolith (.NET 9)
 # Goals: enforce Clean Architecture + DDD boundaries, good API semantics, and maintainable module growth.
 
+tone_instructions: "Be concise and direct"
 reviews:
   auto_review:
     enabled: true
     drafts: false
-    
-  review_level: thorough
-  tone: concise
-  comment_style: inline
+  profile: chill
 
   focus:
     - clean architecture

@@ -14,7 +14,6 @@ public sealed class CreateTenantEndpoint(ISender sender) : Endpoint
 {
     [HttpPost(TenantRoutes.Create)]
     [ProducesResponseType(typeof(Guid),StatusCodes.Status201Created)]
-    [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status409Conflict)]
     [SwaggerOperation(

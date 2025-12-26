@@ -65,7 +65,7 @@ public sealed class TenantSlug : ValueObject
     /// <summary>
     /// Initializes a new instance of the <see cref="TenantSlug"/> class.
     /// </summary>
-    /// <param name="value">The validated first name.</param>
+    /// <param name="value">The validated slug value.</param>
     /// <remarks>
     /// This constructor is intended for EF Core and mapping purposes only.
     /// It performs no validation. For domain-level creation and validation,

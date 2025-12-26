@@ -18,7 +18,7 @@ public interface ITenantRepository
     /// </summary>
     /// <param name="slug">The slug.</param>
     /// <param name="cancellationToken">The cancellation token.</param>
-    /// <returns>The success result if the slug is unique, otherwise a failure result.</returns>
+    /// <returns>Returns true if the slug is unique; otherwise, false.</returns>
     Task<bool> IsSlugUniqueAsync(TenantSlug slug, CancellationToken cancellationToken = default);
     
     /// <summary>
@@ -34,7 +34,7 @@ public interface ITenantRepository
     /// </summary>
     /// <param name="tenantId">The tenant identifier.</param>
     /// <param name="cancellationToken">The cancellation token.</param>
-    /// <returns>The success result if the tenant exists, otherwise a failure result.</returns>
+    /// <returns>Returns true if the tenant exists; otherwise, false.</returns>
     Task<bool> ExistsAsync(TenantId tenantId, CancellationToken cancellationToken = default);
     
     /// <summary>

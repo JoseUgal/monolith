@@ -14,7 +14,7 @@ internal static class TenantMother
         ownerId ??= Guid.NewGuid();
         
         TenantName tenantName = TenantName.Create(name ?? "demo").Value;
-        TenantSlug tenantSlug = TenantSlug.Create(name ?? "demo").Value;
+        TenantSlug tenantSlug = TenantSlug.Create(slug ?? "demo").Value;
         
         return Tenant.Create(tenantName, tenantSlug, ownerId.Value).Value;
     }

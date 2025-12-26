@@ -67,7 +67,7 @@ public static class TenantErrors
     }
 
     /// <summary>
-    /// Contains validation errors related to the tenant's name.
+    /// Contains validation errors related to the tenant's slug.
     /// </summary>
     public static class Slug
     {

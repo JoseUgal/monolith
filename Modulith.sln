@@ -57,7 +57,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modules.Tenants.Endpoints",
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tenants", "Tenants", "{B74EDCB8-048D-489F-8967-6D24A940F045}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modules.Tenants.Domain.Tests", "test\Modules\Tenants\Users\joseugal\Workspace\Modulith\test\Modules\Tenants\Modules.Tenants.Domain.Tests\Modules.Tenants.Domain.Tests.csproj", "{20DAF51A-95DE-4065-806F-BB17563CDE93}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modules.Tenants.Domain.Tests", "test\Modules\Tenants\Modules.Tenants.Domain.Tests\Modules.Tenants.Domain.Tests.csproj", "{20DAF51A-95DE-4065-806F-BB17563CDE93}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

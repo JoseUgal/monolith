@@ -9,6 +9,23 @@ namespace Modules.Tenants.Domain.Tests.Tenants;
 public class TenantTests
 {
     [Fact]
+    public void InviteMember_Should_ReturnConflict_When_RoleIsOwner()
+    {
+        // Arrange
+        Tenant tenant = TenantMother.Create();
+        
+        var userId = Guid.NewGuid();
+
+        // Act
+        Result<TenantMembership> result = tenant.InviteMember(userId, TenantRole.Owner);
+
+        // Assert
+        result.IsFailure.Should().BeTrue();
+        result.Error.Should().Be(TenantErrors.OwnerAlreadyExist);
+    }
+
+    
+    [Fact]
     public void InviteMember_Should_CreateInvitedMembership_When_UserIsNotMember()
     {
         // Arrange
@@ -183,4 +200,6 @@ public class TenantTests
         tenant.Memberships.Should().HaveCount(initialMemberships);
         memberships.Should().HaveCount(initialMemberships + 1);
     }
+    
+    
 }

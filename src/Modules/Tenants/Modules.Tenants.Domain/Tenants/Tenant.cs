@@ -66,6 +66,13 @@ public sealed class Tenant : Entity<TenantId>
     /// <returns>The result of the operation.</returns>
     public Result<TenantMembership> InviteMember(Guid userId, TenantRole role)
     {
+        if (role == TenantRole.Owner)
+        {
+            return Result.Failure<TenantMembership>(
+                TenantErrors.OwnerAlreadyExist
+            );
+        }
+        
         if (_memberships.Any(m => m.UserId == userId))
         {
             return Result.Failure<TenantMembership>(
