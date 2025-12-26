@@ -3,7 +3,7 @@ using Domain.Errors;
 namespace Modules.Tenants.Domain.TenantMemberships;
 
 /// <summary>
-/// Contains the tenants errors.
+/// Contains the tenant memberships errors.
 /// </summary>
 public static class TenantMembershipErrors
 {

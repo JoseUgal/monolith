@@ -33,7 +33,7 @@ internal class PersistenceServiceInstaller : IServiceInstaller
                 options.UseSnakeCaseNamingConvention();
 
                 options.AddInterceptors(
-                    serviceProvider.GetService<UpdateAuditablePropertiesInterceptor>()!
+                    serviceProvider.GetRequiredService<UpdateAuditablePropertiesInterceptor>()!
                 );
             }    
         );

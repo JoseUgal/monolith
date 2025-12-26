@@ -17,8 +17,8 @@ public sealed class TenantRepository(TenantsDbContext dbContext) : ITenantReposi
     /// <inheritdoc />
     public async Task<bool> IsSlugUniqueAsync(TenantSlug slug, CancellationToken cancellationToken = default)
     {
-        return !await dbContext.Set<Tenant>().AnyAsync(user =>
-            user.Slug == slug,
+        return !await dbContext.Set<Tenant>().AnyAsync(tenant =>
+            tenant.Slug == slug,
             cancellationToken
         );
     }

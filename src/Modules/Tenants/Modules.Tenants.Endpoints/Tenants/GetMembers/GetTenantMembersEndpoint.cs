@@ -3,7 +3,6 @@ using Endpoints.Extensions;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Modules.Tenants.Application.Tenants.GetForUser;
 using Modules.Tenants.Application.Tenants.GetMembers;
 using Swashbuckle.AspNetCore.Annotations;
 using Endpoint = Endpoints.Endpoint;
@@ -13,7 +12,7 @@ namespace Modules.Tenants.Endpoints.Tenants.GetMembers;
 public sealed class GetTenantMembersEndpoint(ISender sender) : Endpoint
 {
     [HttpGet(TenantRoutes.GetMembers, Name = nameof(GetTenantMembersEndpoint))]
-    [ProducesResponseType(typeof(TenantResponse[]), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(TenantMemberResponse[]), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [SwaggerOperation(
         Summary = "Get tenant members",

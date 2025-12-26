@@ -33,7 +33,7 @@ public sealed class TenantMembership : Entity<TenantMembershipId>
     public Guid UserId { get; init; }
 
     /// <summary>
-    /// Gets the status.
+    /// Gets the role.
     /// </summary>
     public TenantRole Role { get; private set; }
 

@@ -58,7 +58,7 @@ internal sealed class SqlQueryExecutor(ISqlConnectionFactory sqlConnectionFactor
         if (result == null)
         {
             throw new InvalidOperationException(
-                $"Could not execute scalar {sql}."
+                "The scalar query returned a null result."
             );
         }
         

@@ -20,7 +20,7 @@ internal sealed class AcceptTenantInvitationCommandHandler(ITenantRepository rep
 
         if (tenant == null)
         {
-            return Result.Failure<Guid>(
+            return Result.Failure(
                 TenantErrors.NotFound(tenantId)
             );
         }

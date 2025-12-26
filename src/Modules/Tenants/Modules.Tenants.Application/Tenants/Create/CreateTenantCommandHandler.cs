@@ -30,6 +30,11 @@ internal sealed class CreateTenantCommandHandler(ITenantRepository repository, I
         }
 
         Result<Tenant> tenant = Tenant.Create(name, slug, command.UserId);
+
+        if (tenant.IsFailure)
+        {
+            return Result.Failure<Guid>(tenant.Error);
+        }
         
         repository.Add(tenant.Value);
 
