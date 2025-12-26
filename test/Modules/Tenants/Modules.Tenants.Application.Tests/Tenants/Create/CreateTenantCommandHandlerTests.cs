@@ -90,6 +90,10 @@ public sealed class CreateTenantCommandHandlerTests
             x.IsSlugUniqueAsync(It.IsAny<TenantSlug>(), It.IsAny<CancellationToken>())
         ).ReturnsAsync(true);
 
+        sut.UnitOfWorkMock.Setup(x =>
+            x.SaveChangesAsync(It.IsAny<CancellationToken>())
+        ).Returns(Task.CompletedTask);
+
         // Act
         Result<Guid> result = await sut.Handler.Handle(command, CancellationToken.None);
 
