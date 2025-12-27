@@ -7,6 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\..\Common\Infrastructure\Infrastructure.csproj" />
       <ProjectReference Include="..\Modules.Workspaces.Application\Modules.Workspaces.Application.csproj" />
       <ProjectReference Include="..\Modules.Workspaces.Endpoints\Modules.Workspaces.Endpoints.csproj" />
       <ProjectReference Include="..\Modules.Workspaces.Persistence\Modules.Workspaces.Persistence.csproj" />

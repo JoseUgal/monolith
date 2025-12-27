@@ -7,6 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\..\Common\Persistence\Persistence.csproj" />
       <ProjectReference Include="..\Modules.Workspaces.Domain\Modules.Workspaces.Domain.csproj" />
     </ItemGroup>
 
