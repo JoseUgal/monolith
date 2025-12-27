@@ -58,6 +58,5 @@ public sealed class GetTenantByIdQueryHandlerTests
          result.Value.Id.Should().Be(tenantId);
          result.Value.Name.Should().Be(response.Name);
          result.Value.Slug.Should().Be(response.Slug);
-         
     }
 }

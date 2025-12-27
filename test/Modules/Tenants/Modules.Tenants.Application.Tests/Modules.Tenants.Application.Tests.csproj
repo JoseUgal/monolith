@@ -31,7 +31,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Tenants\GetForUser\" />
       <Folder Include="Tenants\GetMembers\" />
     </ItemGroup>
 
