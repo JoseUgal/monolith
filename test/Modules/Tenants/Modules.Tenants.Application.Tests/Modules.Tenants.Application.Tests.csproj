@@ -30,8 +30,4 @@
       <ProjectReference Include="..\Modules.Tenants.Domain.Tests\Modules.Tenants.Domain.Tests.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Tenants\GetMembers\" />
-    </ItemGroup>
-
 </Project>
