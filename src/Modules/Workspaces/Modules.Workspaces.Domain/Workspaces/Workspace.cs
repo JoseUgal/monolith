@@ -1,4 +1,6 @@
 using Domain.Primitives;
+using Domain.Results;
+using Modules.Workspaces.Domain.WorkspaceMemberships;
 
 namespace Modules.Workspaces.Domain.Workspaces;
 
@@ -19,6 +21,13 @@ public sealed class Workspace : Entity<WorkspaceId>
     /// </summary>
     public WorkspaceName Name { get; private set; }
 
+    private readonly List<WorkspaceMembership> _memberships = [];
+
+    /// <summary>
+    /// Gets the workspace memberships.
+    /// </summary>
+    public IReadOnlyCollection<WorkspaceMembership> Memberships => _memberships.AsReadOnly();
+
     /// <summary>
     /// Creates a new <see cref="Workspace"/> entity.
     /// </summary>
@@ -26,10 +35,40 @@ public sealed class Workspace : Entity<WorkspaceId>
     /// The method generates a new <see cref="WorkspaceId"/> for the entity.
     /// All value objects should be validated in this method.
     /// </remarks>
-    public static Workspace Create(WorkspaceName name)
+    public static Result<Workspace> Create(WorkspaceName name, Guid ownerId)
     {
         var id = new WorkspaceId(Guid.NewGuid());
 
-        return new Workspace(id, name);
+        var workspace = new Workspace(id, name);
+
+        Result result = workspace.AddOwner(ownerId);
+
+        if (result.IsFailure)
+        {
+            return Result.Failure<Workspace>(
+                result.Error
+            );
+        }
+
+        return workspace;
+    }
+
+    /// <summary>
+    /// Adds the first owner membership for this workspace.
+    /// </summary>
+    /// <param name="userId">The identifier of the user.</param>
+    /// <returns>The result of the operation.</returns>
+    private Result AddOwner(Guid userId)
+    {
+        if (_memberships.Count != 0)
+        {
+            return Result.Failure(
+                WorkspaceErrors.OwnerAlreadyExist    
+            );
+        }
+        
+        _memberships.Add(WorkspaceMembership.CreateOwner(Id, userId));
+        
+        return Result.Success();
     }
 }

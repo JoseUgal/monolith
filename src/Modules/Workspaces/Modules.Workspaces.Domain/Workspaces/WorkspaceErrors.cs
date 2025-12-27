@@ -8,6 +8,14 @@ namespace Modules.Workspaces.Domain.Workspaces;
 public static class WorkspaceErrors
 {
     /// <summary>
+    /// Indicates that the owner can only be added at workspace creation.
+    /// </summary>
+    public static Error OwnerAlreadyExist => Error.Conflict(
+        "Workspace.OwnerAlreadyExist",
+        "The owner can only be added at workspace creation."
+    );
+    
+    /// <summary>
     /// Contains validation errors related to the workspace's name.
     /// </summary>
     public static class Name
