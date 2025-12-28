@@ -20,6 +20,7 @@ namespace Modules.Workspaces.Persistence.Migrations
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
+                    tenant_id = table.Column<Guid>(type: "uuid", nullable: false),
                     name = table.Column<string>(type: "character varying(80)", maxLength: 80, nullable: false),
                     created_on_utc = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     modified_on_utc = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
@@ -60,6 +61,12 @@ namespace Modules.Workspaces.Persistence.Migrations
                 table: "workspace_memberships",
                 columns: new[] { "workspace_id", "user_id" },
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "ix_workspaces_tenant_id",
+                schema: "workspaces",
+                table: "workspaces",
+                column: "tenant_id");
         }
 
         /// <inheritdoc />

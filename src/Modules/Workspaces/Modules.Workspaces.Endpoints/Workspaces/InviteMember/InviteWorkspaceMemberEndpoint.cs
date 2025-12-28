@@ -35,6 +35,6 @@ public sealed class InviteWorkspaceMemberEndpoint(ISender sender) : Endpoint
         
         Result<Guid> result = await sender.Send(command, cancellationToken);
         
-        return result.IsFailure ? this.HandleFailure(result) :  NoContent();
+        return result.IsFailure ? this.HandleFailure(result) :  Ok(result.Value);
     }
 }

@@ -11,7 +11,7 @@ internal static class TableNames
     internal const string Workspaces = "workspaces";
     
     /// <summary>
-    /// The workspaces memberships table.
+    /// The workspace memberships table.
     /// </summary>
     internal const string WorkspaceMemberships = "workspace_memberships";
 }

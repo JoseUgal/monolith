@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 namespace Modules.Workspaces.Infrastructure;
 
 /// <summary>
-/// Represents the tenants module installer.
+/// Represents the workspaces module installer.
 /// </summary>
 public sealed class ModuleInstaller : IModuleInstaller
 {

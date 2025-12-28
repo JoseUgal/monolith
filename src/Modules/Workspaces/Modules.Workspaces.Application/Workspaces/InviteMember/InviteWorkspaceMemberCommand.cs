@@ -3,7 +3,7 @@ using Application.Messaging;
 namespace Modules.Workspaces.Application.Workspaces.InviteMember;
 
 /// <summary>
-/// Represents the command for invite a new tenant member.
+/// Represents the command for inviting a new workspace member.
 /// </summary>
 /// <param name="WorkspaceId">The workspace identifier.</param>
 /// <param name="RequestedUserId">The requested user identifier.</param>

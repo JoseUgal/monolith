@@ -5,6 +5,7 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 builder.Services.InstallServicesFromAssemblies(
     builder.Configuration,
     App.AssemblyReference.Assembly,
+    Infrastructure.AssemblyReference.Assembly,
     Persistence.AssemblyReference.Assembly
 );
 

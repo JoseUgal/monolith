@@ -34,7 +34,7 @@ public sealed class GetWorkspaceMembersQueryHandlerTests
         );
         
         sut.Sql.Verify(x =>
-            x.ExecuteAsync(It.IsAny<string>(), It.IsAny<object?>()),
+            x.QueryAsync<WorkspaceMemberResponse>(It.IsAny<string>(), It.IsAny<object?>()),
             Times.Never
         );
     }

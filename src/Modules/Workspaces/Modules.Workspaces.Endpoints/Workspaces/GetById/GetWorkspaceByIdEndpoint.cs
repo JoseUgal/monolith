@@ -23,7 +23,7 @@ public sealed class GetWorkspaceByIdEndpoint(ISender sender) : Endpoint
     {
         var query = new GetWorkspaceByIdQuery(workspaceId);
         
-         Result<WorkspaceResponse> result = await sender.Send(query, cancellationToken);
+        Result<WorkspaceResponse> result = await sender.Send(query, cancellationToken);
         
         return result.IsFailure ? this.HandleFailure(result) : Ok(result.Value);
     }

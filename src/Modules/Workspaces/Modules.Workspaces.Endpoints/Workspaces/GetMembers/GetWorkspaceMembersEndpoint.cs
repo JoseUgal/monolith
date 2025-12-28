@@ -16,7 +16,7 @@ public sealed class GetWorkspaceMembersEndpoint(ISender sender) : Endpoint
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [SwaggerOperation(
         Summary = "Get workspace members",
-        Description = "Retrieves a workspace members.",
+        Description = "Retrieves workspace members.",
         Tags = [WorkspaceRoutes.Tag]
     )]
     public async Task<ActionResult> HandleAsync(Guid workspaceId, CancellationToken cancellationToken = default)

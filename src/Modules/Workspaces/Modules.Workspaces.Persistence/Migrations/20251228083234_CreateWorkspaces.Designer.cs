@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Modules.Workspaces.Persistence.Migrations
 {
     [DbContext(typeof(WorkspacesDbContext))]
-    [Migration("20251227191553_AddTenantIdentifier")]
-    partial class AddTenantIdentifier
+    [Migration("20251228083234_CreateWorkspaces")]
+    partial class CreateWorkspaces
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

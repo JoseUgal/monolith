@@ -31,6 +31,7 @@ internal sealed class WorkspaceConfiguration : IEntityTypeConfiguration<Workspac
             .HasConversion(x => x.Value, v => new WorkspaceId(v));
 
         builder.Property(x => x.TenantId)
+            .ValueGeneratedNever()
             .IsRequired();
         
         builder
