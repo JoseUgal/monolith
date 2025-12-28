@@ -61,6 +61,35 @@ public sealed class Workspace : Entity<WorkspaceId>
     }
 
     /// <summary>
+    /// Invites a user to this workspace with a role.
+    /// </summary>
+    /// <param name="userId">The user identifier.</param>
+    /// <param name="role">The role.</param>
+    /// <returns>The result of the operation.</returns>
+    public Result<WorkspaceMembership> InviteMember(Guid userId, WorkspaceMembershipRole role)
+    {
+        if (role == WorkspaceMembershipRole.Owner)
+        {
+            return Result.Failure<WorkspaceMembership>(
+                WorkspaceErrors.OwnerAlreadyExist
+            );
+        }
+
+        if (_memberships.Any(m => m.UserId == userId))
+        {
+            return Result.Failure<WorkspaceMembership>(
+                WorkspaceErrors.MemberAlreadyExist
+            );
+        }
+        
+        var membership = WorkspaceMembership.Invite(Id, userId, role);
+        
+        _memberships.Add(membership);
+        
+        return membership;
+    }
+
+    /// <summary>
     /// Adds the first owner membership for this workspace.
     /// </summary>
     /// <param name="userId">The identifier of the user.</param>

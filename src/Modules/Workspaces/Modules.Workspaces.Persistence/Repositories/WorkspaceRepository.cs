@@ -1,4 +1,5 @@
 using Application.ServiceLifetimes;
+using Microsoft.EntityFrameworkCore;
 using Modules.Workspaces.Domain.Workspaces;
 
 namespace Modules.Workspaces.Persistence.Repositories;
@@ -11,4 +12,15 @@ public sealed class WorkspaceRepository(WorkspacesDbContext dbContext) : IWorksp
 {
     /// <inheritdoc />
     public void Add(Workspace workspace) => dbContext.Set<Workspace>().Add(workspace);
+
+    /// <inheritdoc />
+    public async Task<Workspace?> GetWithMembershipsAsync(WorkspaceId workspaceId, CancellationToken cancellationToken = default)
+    {
+        return await dbContext.Set<Workspace>()
+            .Include(workspace => workspace.Memberships)
+            .FirstOrDefaultAsync(workspace => 
+                workspace.Id == workspaceId, 
+                cancellationToken
+            );
+    }
 }

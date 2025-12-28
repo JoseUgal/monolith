@@ -25,6 +25,14 @@ public static class WorkspaceErrors
     );
     
     /// <summary>
+    /// Indicates that the user is already a member of this workspace.
+    /// </summary>
+    public static Error MemberAlreadyExist => Error.Conflict(
+        "Workspace.MemberAlreadyExist",
+        "The user is already a member of this workspace."
+    );
+    
+    /// <summary>
     /// Contains validation errors related to the workspace's name.
     /// </summary>
     public static class Name

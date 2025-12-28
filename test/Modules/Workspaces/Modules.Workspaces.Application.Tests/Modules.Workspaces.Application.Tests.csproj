@@ -28,6 +28,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\..\..\src\Modules\Workspaces\Modules.Workspaces.Application\Modules.Workspaces.Application.csproj" />
+      <ProjectReference Include="..\Modules.Workspaces.Domain.Tests\Modules.Workspaces.Domain.Tests.csproj" />
     </ItemGroup>
 
 </Project>

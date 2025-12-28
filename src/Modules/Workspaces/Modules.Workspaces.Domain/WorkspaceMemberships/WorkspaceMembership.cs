@@ -57,4 +57,22 @@ public sealed class WorkspaceMembership : Entity<WorkspaceMembershipId>
             WorkspaceMembershipStatus.Active
         );
     }
+
+    /// <summary>
+    /// Invites a user to join the workspace.
+    /// </summary>
+    /// <param name="workspaceId">The workspace identifier.</param>
+    /// <param name="userId">The user identifier.</param>
+    /// <param name="role">The role.</param>
+    /// <returns>The created <see cref="WorkspaceMembership"/>.</returns>
+    public static WorkspaceMembership Invite(WorkspaceId workspaceId, Guid userId, WorkspaceMembershipRole role)
+    {
+        return new WorkspaceMembership(
+            new WorkspaceMembershipId(Guid.NewGuid()),
+            workspaceId,
+            userId,
+            role,
+            WorkspaceMembershipStatus.Invited
+        );
+    }
 }
