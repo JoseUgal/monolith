@@ -42,7 +42,7 @@ internal sealed class TenantMembershipConfiguration : IEntityTypeConfiguration<T
             .IsRequired();
 
         builder
-            .Property(x => x.Role)
+            .Property(x => x.MembershipRole)
             .HasConversion<string>()
             .IsRequired();
         

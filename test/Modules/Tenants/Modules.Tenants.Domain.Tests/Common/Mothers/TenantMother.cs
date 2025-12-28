@@ -20,12 +20,12 @@ public static class TenantMother
     }
     
     public static Tenant CreateWithInvitedMemberships(
-        params (Guid MemberId, TenantRole role)[] memberships
+        params (Guid MemberId, TenantMembershipRole role)[] memberships
     )
     {
         Tenant tenant = Create();
 
-        foreach ((Guid MemberId, TenantRole Role) membership in memberships)
+        foreach ((Guid MemberId, TenantMembershipRole Role) membership in memberships)
         {
             tenant.InviteMember(membership.MemberId, membership.Role);
         }
@@ -34,12 +34,12 @@ public static class TenantMother
     }
     
     public static Tenant CreateWithActivatedMemberships(
-        params (Guid MemberId, TenantRole role)[] memberships
+        params (Guid MemberId, TenantMembershipRole role)[] memberships
     )
     {
         Tenant tenant = Create();
 
-        foreach ((Guid MemberId, TenantRole Role) membership in memberships)
+        foreach ((Guid MemberId, TenantMembershipRole Role) membership in memberships)
         {
             TenantMembership member = tenant.InviteMember(membership.MemberId, membership.Role).Value;
 

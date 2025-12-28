@@ -62,11 +62,11 @@ public sealed class Tenant : Entity<TenantId>
     /// Invites a user to this tenant with a role.
     /// </summary>
     /// <param name="userId">The identifier of the user.</param>
-    /// <param name="role">The role.</param>
+    /// <param name="membershipRole">The role.</param>
     /// <returns>The result of the operation.</returns>
-    public Result<TenantMembership> InviteMember(Guid userId, TenantRole role)
+    public Result<TenantMembership> InviteMember(Guid userId, TenantMembershipRole membershipRole)
     {
-        if (role == TenantRole.Owner)
+        if (membershipRole == TenantMembershipRole.Owner)
         {
             return Result.Failure<TenantMembership>(
                 TenantErrors.OwnerAlreadyExist
@@ -80,7 +80,7 @@ public sealed class Tenant : Entity<TenantId>
             );
         }
 
-        var membership = TenantMembership.Invite(Id, userId, role);
+        var membership = TenantMembership.Invite(Id, userId, membershipRole);
         
         _memberships.Add(membership);
 

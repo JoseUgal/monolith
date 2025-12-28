@@ -12,13 +12,13 @@ public sealed class TenantMembership : Entity<TenantMembershipId>
     /// <param name="id">The identifier.</param>
     /// <param name="tenantId">The tenant identifier.</param>
     /// <param name="userId">The user identifier.</param>
-    /// <param name="role">The role.</param>
+    /// <param name="membershipRole">The role.</param>
     /// <param name="status">The status.</param>
-    private TenantMembership(TenantMembershipId id, TenantId tenantId, Guid userId, TenantRole role, TenantMembershipStatus status) : base(id)
+    private TenantMembership(TenantMembershipId id, TenantId tenantId, Guid userId, TenantMembershipRole membershipRole, TenantMembershipStatus status) : base(id)
     {
         TenantId = tenantId;
         UserId = userId;
-        Role = role;
+        MembershipRole = membershipRole;
         Status = status;
     }
     
@@ -35,7 +35,7 @@ public sealed class TenantMembership : Entity<TenantMembershipId>
     /// <summary>
     /// Gets the role.
     /// </summary>
-    public TenantRole Role { get; private set; }
+    public TenantMembershipRole MembershipRole { get; private set; }
 
     /// <summary>
     /// Gets the status.
@@ -54,7 +54,7 @@ public sealed class TenantMembership : Entity<TenantMembershipId>
             new TenantMembershipId(Guid.NewGuid()),
             tenantId,
             userId,
-            TenantRole.Owner,
+            TenantMembershipRole.Owner,
             TenantMembershipStatus.Active
         );
     }
@@ -64,15 +64,15 @@ public sealed class TenantMembership : Entity<TenantMembershipId>
     /// </summary>
     /// <param name="tenantId">The tenant identifier.</param>
     /// <param name="userId">The user identifier.</param>
-    /// <param name="role">The role.</param>
+    /// <param name="membershipRole">The role.</param>
     /// <returns>The created <see cref="TenantMembership"/>.</returns>
-    public static TenantMembership Invite(TenantId tenantId, Guid userId, TenantRole role)
+    public static TenantMembership Invite(TenantId tenantId, Guid userId, TenantMembershipRole membershipRole)
     {
         return new TenantMembership(
             new TenantMembershipId(Guid.NewGuid()),
             tenantId,
             userId,
-            role,
+            membershipRole,
             TenantMembershipStatus.Invited
         );
     }

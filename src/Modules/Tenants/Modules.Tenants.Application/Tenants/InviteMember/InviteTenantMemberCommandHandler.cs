@@ -25,7 +25,7 @@ internal sealed class InviteTenantMemberCommandHandler(ITenantRepository reposit
             );
         }
 
-        if (!Enum.TryParse(command.Role, ignoreCase: true, out TenantRole role))
+        if (!Enum.TryParse(command.Role, ignoreCase: true, out TenantMembershipRole role))
         {
             return Result.Failure<Guid>(
                 TenantMembershipErrors.Role.IsInvalid

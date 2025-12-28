@@ -26,7 +26,7 @@ internal class InviteTenantMemberCommandHandlerSut
         Guid.NewGuid(),
         Guid.NewGuid(),
         Guid.NewGuid(),
-        nameof(TenantRole.Member)
+        nameof(TenantMembershipRole.Member)
     );
     
     public void VerifyPersistedNever()

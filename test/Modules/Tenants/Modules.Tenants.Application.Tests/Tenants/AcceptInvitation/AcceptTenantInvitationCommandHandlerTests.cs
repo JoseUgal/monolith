@@ -69,7 +69,7 @@ public sealed class AcceptTenantInvitationCommandHandlerTests
         var userId = Guid.NewGuid();
 
         Tenant tenant = TenantMother.CreateWithActivatedMemberships(
-            (userId, TenantRole.Member)
+            (userId, TenantMembershipRole.Member)
         );
         
         TenantMembership membership = tenant.Memberships.Single(x => x.UserId == userId);
@@ -101,7 +101,7 @@ public sealed class AcceptTenantInvitationCommandHandlerTests
         var userId = Guid.NewGuid();
 
         Tenant tenant = TenantMother.CreateWithInvitedMemberships(
-            (userId, TenantRole.Member)
+            (userId, TenantMembershipRole.Member)
         );
         
         TenantMembership membership = tenant.Memberships.Single(x => x.UserId == userId);
@@ -133,7 +133,7 @@ public sealed class AcceptTenantInvitationCommandHandlerTests
         var invitedUserId = Guid.NewGuid();
 
         Tenant tenant = TenantMother.CreateWithInvitedMemberships(
-            (invitedUserId, TenantRole.Member)
+            (invitedUserId, TenantMembershipRole.Member)
         );
         
         TenantMembership membership = tenant.Memberships.Single(x => x.UserId == invitedUserId);

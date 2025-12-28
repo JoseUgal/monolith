@@ -75,7 +75,7 @@ public sealed class InviteTenantMemberCommandHandlerTests
         };
 
         Tenant tenant = TenantMother.CreateWithActivatedMemberships(
-            (memberId, TenantRole.Member)
+            (memberId, TenantMembershipRole.Member)
         );
 
         sut.Repository.Setup(x =>

@@ -17,7 +17,7 @@ public class TenantTests
         var userId = Guid.NewGuid();
 
         // Act
-        Result<TenantMembership> result = tenant.InviteMember(userId, TenantRole.Owner);
+        Result<TenantMembership> result = tenant.InviteMember(userId, TenantMembershipRole.Owner);
 
         // Assert
         result.IsFailure.Should().BeTrue();
@@ -34,12 +34,12 @@ public class TenantTests
         var memberId = Guid.NewGuid();
         
         // Act
-        Result<TenantMembership> result = tenant.InviteMember(memberId, TenantRole.Member);
+        Result<TenantMembership> result = tenant.InviteMember(memberId, TenantMembershipRole.Member);
 
         // Assert
         result.IsSuccess.Should().BeTrue();
         result.Value.Status.Should().Be(TenantMembershipStatus.Invited);
-        result.Value.Role.Should().Be(TenantRole.Member);
+        result.Value.MembershipRole.Should().Be(TenantMembershipRole.Member);
         tenant.Memberships.Should().HaveCount(2);
     }
     
@@ -52,7 +52,7 @@ public class TenantTests
         TenantMembership member = tenant.Memberships.First();
         
         // Act
-        Result<TenantMembership> result = tenant.InviteMember(member.UserId, TenantRole.Member);
+        Result<TenantMembership> result = tenant.InviteMember(member.UserId, TenantMembershipRole.Member);
         
         // Assert
         result.IsFailure.Should().BeTrue();
@@ -68,11 +68,11 @@ public class TenantTests
         var memberId = Guid.NewGuid();
         
         // Act
-        Result<TenantMembership> result = tenant.InviteMember(memberId, TenantRole.Admin);
+        Result<TenantMembership> result = tenant.InviteMember(memberId, TenantMembershipRole.Admin);
         
         // Assert
         result.IsSuccess.Should().BeTrue();
-        result.Value.Role.Should().Be(TenantRole.Admin);
+        result.Value.MembershipRole.Should().Be(TenantMembershipRole.Admin);
     }
     
     [Fact]
@@ -84,7 +84,7 @@ public class TenantTests
         var memberId = Guid.NewGuid();
         
         // Act
-        Result<TenantMembership> result = tenant.InviteMember(memberId, TenantRole.Member);
+        Result<TenantMembership> result = tenant.InviteMember(memberId, TenantMembershipRole.Member);
         
         // Assert
         result.IsSuccess.Should().BeTrue();
@@ -98,7 +98,7 @@ public class TenantTests
         var memberId = Guid.NewGuid();
         
         Tenant tenant = TenantMother.CreateWithInvitedMemberships(
-            new ValueTuple<Guid, TenantRole>(memberId, TenantRole.Member)
+            new ValueTuple<Guid, TenantMembershipRole>(memberId, TenantMembershipRole.Member)
         );
         
         TenantMembership invited = tenant.Memberships.Single(x => x.UserId == memberId);
@@ -136,7 +136,7 @@ public class TenantTests
         var memberId = Guid.NewGuid();
         
         Tenant tenant = TenantMother.CreateWithActivatedMemberships(
-            new ValueTuple<Guid, TenantRole>(memberId, TenantRole.Member)
+            new ValueTuple<Guid, TenantMembershipRole>(memberId, TenantMembershipRole.Member)
         );
 
         // Act
@@ -154,7 +154,7 @@ public class TenantTests
         var memberId = Guid.NewGuid();
         
         Tenant tenant = TenantMother.CreateWithInvitedMemberships(
-            new ValueTuple<Guid, TenantRole>(memberId, TenantRole.Member)
+            new ValueTuple<Guid, TenantMembershipRole>(memberId, TenantMembershipRole.Member)
         );
 
         // Act
@@ -172,11 +172,11 @@ public class TenantTests
         var memberId = Guid.NewGuid();
         
         Tenant tenant = TenantMother.CreateWithInvitedMemberships(
-            new ValueTuple<Guid, TenantRole>(memberId, TenantRole.Member)
+            new ValueTuple<Guid, TenantMembershipRole>(memberId, TenantMembershipRole.Member)
         );
 
         // Act
-        Result result = tenant.InviteMember(memberId, TenantRole.Member);
+        Result result = tenant.InviteMember(memberId, TenantMembershipRole.Member);
         
         // Assert
         result.IsFailure.Should().BeTrue();
@@ -194,7 +194,7 @@ public class TenantTests
         // Act
         var memberships = tenant.Memberships.ToList();
 
-        memberships.Add(TenantMembership.Invite(tenant.Id, Guid.NewGuid(), TenantRole.Member));
+        memberships.Add(TenantMembership.Invite(tenant.Id, Guid.NewGuid(), TenantMembershipRole.Member));
 
         // Assert
         tenant.Memberships.Should().HaveCount(initialMemberships);

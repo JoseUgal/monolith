@@ -40,8 +40,8 @@ public sealed class GetTenantMembersQueryHandlerTests
         var sut = new GetTenantMembersQueryHandlerSut();
 
         Tenant tenant = TenantMother.CreateWithActivatedMemberships(
-            (Guid.NewGuid(), TenantRole.Member),
-            (Guid.NewGuid(), TenantRole.Admin)
+            (Guid.NewGuid(), TenantMembershipRole.Member),
+            (Guid.NewGuid(), TenantMembershipRole.Admin)
         );
 
         var query = new GetTenantMembersQuery(tenant.Id.Value);
@@ -57,7 +57,7 @@ public sealed class GetTenantMembersQueryHandlerTests
         result.IsSuccess.Should().BeTrue();
         result.Value.Length.Should().Be(tenant.Memberships.Count);
         result.Value.Select(x => x.Role).Should().Contain(
-            [nameof(TenantRole.Owner).ToLowerInvariant(), nameof(TenantRole.Member).ToLowerInvariant(), nameof(TenantRole.Admin).ToLowerInvariant()]
+            [nameof(TenantMembershipRole.Owner).ToLowerInvariant(), nameof(TenantMembershipRole.Member).ToLowerInvariant(), nameof(TenantMembershipRole.Admin).ToLowerInvariant()]
         );
         result.Value.Select(x => x.Status).Should().Contain(
             [nameof(TenantMembershipStatus.Active).ToLowerInvariant()]

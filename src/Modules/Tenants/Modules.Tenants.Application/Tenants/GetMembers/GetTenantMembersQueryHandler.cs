@@ -27,7 +27,7 @@ internal sealed class GetTenantMembersQueryHandler(ITenantRepository repository)
         return members.Select(member => new TenantMemberResponse
             {
                 UserId = member.UserId,
-                Role = member.Role.ToString().ToLowerInvariant(),
+                Role = member.MembershipRole.ToString().ToLowerInvariant(),
                 Status = member.Status.ToString().ToLowerInvariant()
             }
         ).ToArray();
