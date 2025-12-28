@@ -19,15 +19,20 @@ public static class WorkspaceMother
         return Workspace.Create(tenantId.Value, workspaceName, ownerId.Value).Value;
     }
     
-    public static Workspace CreateWithInvitedMemberships(
-        params (Guid MemberId, WorkspaceMembershipRole role)[] memberships
+    public static Workspace CreateWithMemberships(
+        params (Guid MemberId, WorkspaceMembershipRole role, WorkspaceMembershipStatus Status)[] memberships
     )
     {
         Workspace workspace = Create();
 
-        foreach ((Guid MemberId, WorkspaceMembershipRole Role) membership in memberships)
+        foreach ((Guid MemberId, WorkspaceMembershipRole Role, WorkspaceMembershipStatus Status) membership in memberships)
         {
-            workspace.InviteMember(membership.MemberId, membership.Role);
+            WorkspaceMembership member = workspace.InviteMember(membership.MemberId, membership.Role).Value;
+
+            if (membership.Status == WorkspaceMembershipStatus.Active)
+            {
+                workspace.AcceptInvitation(member.Id, member.UserId);
+            }
         }
 
         return workspace;

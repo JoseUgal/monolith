@@ -1,4 +1,5 @@
 using Domain.Primitives;
+using Domain.Results;
 using Modules.Workspaces.Domain.Workspaces;
 
 namespace Modules.Workspaces.Domain.WorkspaceMemberships;
@@ -74,5 +75,30 @@ public sealed class WorkspaceMembership : Entity<WorkspaceMembershipId>
             role,
             WorkspaceMembershipStatus.Invited
         );
+    }
+
+    /// <summary>
+    /// Accepts the invitation for this workspace membership.
+    /// </summary>
+    /// <returns>The result of the operation.</returns>
+    public Result Accept()
+    {
+        if (Status == WorkspaceMembershipStatus.Active)
+        {
+            return Result.Failure(
+                WorkspaceMembershipErrors.Invitation.AlreadyAccepted    
+            );
+        }
+
+        if (Status != WorkspaceMembershipStatus.Invited)
+        {
+            return Result.Failure(
+                WorkspaceMembershipErrors.Invitation.InvalidStatus
+            );
+        }
+        
+        Status = WorkspaceMembershipStatus.Active;
+        
+        return Result.Success();
     }
 }

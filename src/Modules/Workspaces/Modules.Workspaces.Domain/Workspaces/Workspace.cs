@@ -90,6 +90,33 @@ public sealed class Workspace : Entity<WorkspaceId>
     }
 
     /// <summary>
+    /// Accepts the invitation for the specified workspace membership.
+    /// </summary>
+    /// <param name="membershipId">The identifier of the workspace membership.</param>
+    /// <param name="userId">The identifier of the user.</param>
+    /// <returns>The result of the operation.</returns>
+    public Result AcceptInvitation(WorkspaceMembershipId membershipId, Guid userId)
+    {
+        WorkspaceMembership? membership = _memberships.SingleOrDefault(m => m.Id == membershipId);
+
+        if (membership == null)
+        {
+            return Result.Failure(
+                WorkspaceMembershipErrors.NotFound(membershipId) 
+            );
+        }
+
+        if (membership.UserId != userId)
+        {
+            return Result.Failure(
+                WorkspaceMembershipErrors.Invitation.NotForUser    
+            );
+        }
+
+        return membership.Accept();
+    }
+
+    /// <summary>
     /// Adds the first owner membership for this workspace.
     /// </summary>
     /// <param name="userId">The identifier of the user.</param>
