@@ -10,6 +10,7 @@
       <ProjectReference Include="..\src\Common\Infrastructure\Infrastructure.csproj" />
       <ProjectReference Include="..\src\Modules\Tenants\Modules.Tenants.Infrastructure\Modules.Tenants.Infrastructure.csproj" />
       <ProjectReference Include="..\src\Modules\Users\Modules.Users.Infrastructure\Modules.Users.Infrastructure.csproj" />
+      <ProjectReference Include="..\src\Modules\Workspaces\Modules.Workspaces.Infrastructure\Modules.Workspaces.Infrastructure.csproj" />
     </ItemGroup>
 
     <ItemGroup>

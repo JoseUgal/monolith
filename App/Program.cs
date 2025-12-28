@@ -5,13 +5,15 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 builder.Services.InstallServicesFromAssemblies(
     builder.Configuration,
     App.AssemblyReference.Assembly,
+    Infrastructure.AssemblyReference.Assembly,
     Persistence.AssemblyReference.Assembly
 );
 
 builder.Services.InstallModulesFromAssemblies(
     builder.Configuration,
     Modules.Users.Infrastructure.AssemblyReference.Assembly,
-    Modules.Tenants.Infrastructure.AssemblyReference.Assembly
+    Modules.Tenants.Infrastructure.AssemblyReference.Assembly,
+    Modules.Workspaces.Infrastructure.AssemblyReference.Assembly
 );
 
 WebApplication app = builder.Build();
