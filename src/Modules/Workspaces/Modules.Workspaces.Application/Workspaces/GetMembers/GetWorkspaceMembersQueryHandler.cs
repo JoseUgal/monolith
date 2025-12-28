@@ -26,7 +26,7 @@ internal sealed class GetWorkspaceMembersQueryHandler(IWorkspaceRepository repos
             """
                 SELECT 
                     wm.id, wm.user_id, wm.role, wm.status
-                FROM workspaces.workspace_members wm
+                FROM workspaces.workspace_memberships wm
                 WHERE wm.workspace_id = @workspaceId
                 ORDER BY wm.created_on_utc
             """,
